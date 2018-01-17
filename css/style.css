@@ -8,14 +8,8 @@ body{
     height: 600px;
     width: 50%;
     }
-<<<<<<< HEAD
-#fotballpuben {
-  background-color: brown;
-}
-body{
-  background-color: pink;
-=======
-    footer{
+
+footer{
     	padding: 20px 0 20px;
     	right: 0;
     	bottom: 0;
@@ -35,5 +29,4 @@ body{
 .pic{
   width:10px;
   height:auto;
->>>>>>> fd4877d8554195b058ed0887ee14148f4e071886
 }
