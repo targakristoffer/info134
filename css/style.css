@@ -15,7 +15,8 @@ body{
     	left: 0;
     	text-align: center;
     }
-    #fotballpuben, #heidis, #lille, #vaskeriet, #bryggen{
+
+#fotballpuben, #heidis, #lille, #vaskeriet, #bryggen{
     margin: 0 auto;
     margin-right: auto;
     margin-bottom: 0px;
@@ -28,4 +29,10 @@ body{
 .pic{
   width:200px;
   height:auto;
+}
+a{
+  text-decoration: none;
+}
+a:hover{
+  background-color: orange;
 }
