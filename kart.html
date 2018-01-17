@@ -2,12 +2,7 @@
 <html>
   <head>
     <title>Kart</title>
-    <style>
-       #map {
-        height: 600px;
-        width: 50%;
-       }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
     <h1>Kart over Bergen</h1>
@@ -15,7 +10,7 @@
     <script>
       function initMap() {
         var heidis = {lat: 60.390106, lng: 5.320687};
-        var fotballpuben = {lat: 60.390265, lng: 5.320959}
+        var fotballpuben = {lat: 60.390265, lng: 5.320959};
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
           center: heidis
