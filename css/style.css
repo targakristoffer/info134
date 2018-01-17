@@ -8,3 +8,24 @@ body{
     height: 600px;
     width: 50%;
     }
+    footer{
+    	padding: 20px 0 20px;
+    	right: 0;
+    	bottom: 0;
+    	left: 0;
+    	text-align: center;
+    }
+    #fotballpuben, #heidis, #lille, #vaskeriet, #bryggen{
+    margin: 0 auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+}
+.pic{
+  width:10px;
+  height:auto;
+}
