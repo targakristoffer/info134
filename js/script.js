@@ -6,7 +6,7 @@ function initMap() {
     var vaskeriet = {lat: 60.391509, lng: 5.319852};
     var bryggen = {lat:60.397495, lng: 5.322580};
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
+      zoom: 14,
       center: heidis
     });
     var marker = new google.maps.Marker({
