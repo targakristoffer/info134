@@ -1,3 +1,9 @@
+body{
+  margin: 0;
+  padding: 140px 0px 0px 0px;
+  height: 100%;
+}
+
 #map {
     height: 600px;
     width: 50%;
