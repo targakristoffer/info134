@@ -2,31 +2,14 @@
 <html>
   <head>
     <title>Kart</title>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE&callback=initMap">
+    </script>
+    <script src="js/script.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
     <h1>Kart over Bergen</h1>
     <div id="map"></div>
-    <script>
-      function initMap() {
-        var heidis = {lat: 60.390106, lng: 5.320687};
-        var fotballpuben = {lat: 60.390265, lng: 5.320959};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: heidis
-        });
-        var marker = new google.maps.Marker({
-          position: heidis,
-          map: map
-        });
-        var marker2 = new google.maps.Marker({
-          position: fotballpuben,
-          map: map
-        });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE&callback=initMap">
-    </script>
   </body>
 </html>
