@@ -1,10 +1,39 @@
+body{
+  margin: 0;
+  padding: 140px 0px 0px 0px;
+  height: 100%;
+}
+
 #map {
     height: 600px;
     width: 50%;
     }
+<<<<<<< HEAD
 #fotballpuben {
   background-color: brown;
 }
 body{
   background-color: pink;
+=======
+    footer{
+    	padding: 20px 0 20px;
+    	right: 0;
+    	bottom: 0;
+    	left: 0;
+    	text-align: center;
+    }
+    #fotballpuben, #heidis, #lille, #vaskeriet, #bryggen{
+    margin: 0 auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+}
+.pic{
+  width:10px;
+  height:auto;
+>>>>>>> fd4877d8554195b058ed0887ee14148f4e071886
 }
