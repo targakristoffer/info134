@@ -50,6 +50,9 @@ nav{
 	padding-left: 0;
 	z-index:1;
 }
+nav a{
+  margin-right: 50px;
+}
 ul{
 	overflow: hidden;
 }
