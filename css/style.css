@@ -13,11 +13,6 @@ p{
 h1,h2,h3{
   color:white;
 }
-#map {
-    height: 600px;
-    width: 50%;
-    }
-
 footer{
     	padding: 20px 0 20px;
     	right: 0;
@@ -25,17 +20,6 @@ footer{
     	left: 0;
     	text-align: center;
     }
-
-#fotballpuben, #heidis, #lille, #vaskeriet, #bryggen{
-    margin: 0 auto;
-    margin-right: auto;
-    margin-bottom: 0px;
-    margin-left: auto;
-    padding-top: 0px;
-    padding-right: 20px;
-    padding-bottom: 0px;
-    padding-left: 20px;
-}
 .pic{
   width:200px;
   height:auto;
@@ -61,3 +45,17 @@ nav{
 nav a{
   margin-right: 50px;
 }
+#fotballpuben, #heidis, #lille, #vaskeriet, #bryggen{
+    margin: 0 auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+}
+#map {
+    height: 600px;
+    width: 50%;
+    }
