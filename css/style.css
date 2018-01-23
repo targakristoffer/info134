@@ -7,7 +7,12 @@ background: linear-gradient(to left, #414345, #232526); /* W3C, IE 10+/ Edge, Fi
   height: 100%;
   	font-family: 'New Rocker', cursive;
 }
-
+p{
+  color: white;
+}
+h1,h2,h3{
+  color:white;
+}
 #map {
     height: 600px;
     width: 50%;
