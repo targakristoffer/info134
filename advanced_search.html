@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>advanced_search</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=New+Rocker" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+          <a href="index.html">Forside</a>
+          <a href="Toaletter.html">Toaletter i Bergen!</a>
+          <a href="informasjon.html">Mer informasjon om utesteder</a>
+          <a href="advanced_search.html">Avansert Søk</a>
+        <li><div>
+          <form class="newsearch" method="get" action="search.html">
+            <input type="text" id="toalett" name="toalett" size="21" maxlength="100" placeholder="Search...">
+            <input type="submit" value="Search" class="button">
+          </form></div>
+        </li>
+      </nav>
+      <h1>Advanced search</h1>
+      <div class="kasse">
+           	<form id="search" action="search.html" method="get">
+				<div>
+				<h2>Her blir det mulig å søke etter toaletter basert på kjønn, rullestoltilgang, åpen nå, åpen, stellerom, maks pris og gratis.  </h2>
+				</div>
+			<fieldset>
+				<legend>Søk</legend>
+				<div>
+					<label for="kjonnlabel">Kjønn</label>
+					<input id="kjonnlabel" name="kjonnlabel" type="text" placeholder="Mann eller Dame eller Transeksuell?" >
+				</div>
+				<div>
+					<label for="rullestoltilgang">Rullestoltilgang</label>
+					<input id="rullestoltilgang" name="rullestoltilgang" type="text" placeholder="Er jeg for feit til å passe inn med rullestolen min?" >
+				</div>
+				<div>
+					<label for="aapennaa">Åpen nå?</label>
+					<input id="aapennaa" name="aapennaa" type="text" placeholder="Ja?Nei?" >
+				</div>
+				<div>
+					<label for="aapningstid">Åpningstid</label>
+					<input id="aapningstid" name="aapningstid" type="text" placeholder="Jess?">
+				</div>
+				<div>
+					<label for="stellerom">Stellerom</label>
+					<input id="stellerom" name="stellerom" type="text" placeholder="Ja?Nei?">
+				</div>
+        <div>
+          <label for="pris">Maksimum Pris</label>
+          <input id="pris" name="pris" type="text" placeholder="$$$$$?">
+        </div>	<div>
+  					<label for="gratis">Gratis</label>
+  					<input id="gratis" name="gratis" type="text" placeholder="Jeg er en jøde">
+  				</div>
+			</fieldset>
+			<input type="submit" id="submit_search" value="Søk">
+		</form>
+      </div>
+      <footer>
+        <p>
+        Nettside om de 5 kuleste utestedene i Bergen
+        &#169; Group ...
+        </p>
+      </footer>
+  </body>
+</html>
