@@ -26,7 +26,6 @@
 				<h2>Her blir det mulig å søke etter toaletter basert på kjønn, rullestoltilgang, åpen nå, åpen, stellerom, maks pris og gratis.  </h2>
 				</div>
 			<fieldset>
-				<legend>Søk</legend>
 				<div>
 					<label for="kjonnlabel">Mann</label>
 					<input id="kjonnlabel" name="kjonnlabel" type="checkbox">
@@ -41,27 +40,33 @@
 				</div>
 				<div>
 					<label for="rullestoltilgang">Rullestoltilgang</label>
-					<input id="rullestoltilgang" name="rullestoltilgang" type="checkbox" placeholder="Er jeg for feit til å passe inn med rullestolen min?" >
+					<input id="rullestoltilgang" name="rullestoltilgang" type="checkbox">
 				</div>
 				<div>
 					<label for="aapennaa">Åpen nå?</label>
-					<input id="aapennaa" name="aapennaa" type="checkbox" placeholder="Ja?Nei?" >
+					<input id="aapennaa" name="aapennaa" type="checkbox">
 				</div>
-				<div>
+        <div>
+        <!--    <label for="gratis">Gratis</label>
+            <input id="gratis" name="gratis" type="checkbox">
+          </div>-->
+          <div>
+            <label for="stellerom">Stellerom</label>
+            <input id="stellerom" name="stellerom" type="checkbox">
+          </div>
+          <div>
 					<label for="aapningstid">Åpningstid</label>
 					<input id="aapningstid" name="aapningstid" type="text" placeholder="Jess?">
 				</div>
-				<div>
-					<label for="stellerom">Stellerom</label>
-					<input id="stellerom" name="stellerom" type="checkbox" placeholder="Ja?Nei?">
-				</div>
         <div>
           <label for="pris">Maksimum Pris</label>
-          <input id="pris" name="pris" type="text" placeholder="$$$$$?">
-        </div>	<div>
-  					<label for="gratis">Gratis</label>
-  					<input id="gratis" name="gratis" type="checkbox" placeholder="Jeg er en jøde">
-  				</div>
+          <select>
+  	  <optgroup label="Maks pris">
+          <option value = "0 kr">0</option>
+      <option value = "10 kr">10 kr</option>
+        <option value = "20 kr">20 kr</option>
+    </select>
+        </div>
 			</fieldset>
 			<input type="submit" id="submit_search" value="Søk">
 		</form>

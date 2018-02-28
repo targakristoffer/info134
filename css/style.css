@@ -11,6 +11,9 @@ background: linear-gradient(to left, #414345, #232526); /* W3C, IE 10+/ Edge, Fi
 p{
   color: white;
 }
+label{
+  color: white;
+}
 h1,h2,h3{
   color:white;
 }
@@ -21,7 +24,6 @@ footer{
     	left: 0;
     	text-align: center;
     }
-
 .pic{
   width:200px;
   height:auto;
@@ -46,6 +48,13 @@ nav{
 nav a{
   margin-right: 50px;
 }
+.kasse{
+  display: flex;
+  flex: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
 #fotballpuben, #heidis, #lille, #vaskeriet, #bryggen{
     margin: 0 auto;
     margin-right: auto;
@@ -66,11 +75,4 @@ nav a{
     }
     .button{
         cursor: pointer;
-    }
-    .kasse{
-      display: flex;
-      flex: wrap;
-      justify-content: center;
-      align-items: center;
-      padding-top: 50px;
     }
