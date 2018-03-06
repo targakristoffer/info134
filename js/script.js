@@ -1,4 +1,3 @@
-
 function initMap() {
     var heidis = {lat: 60.390106, lng: 5.320687};
     var fotballpuben = {lat: 60.390265, lng: 5.320959};
