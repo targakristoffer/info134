@@ -15,11 +15,10 @@ for(var i =0; i < mydata.length; i++){
   var pos = {lat: parseFloat(mydata[i].latitude), lng: parseFloat(mydata[i].longitude)};
   document.getElementById("test").innerHTML = b + a + "<br>";
   var marker = new google.maps.Marker({
+    animation: google.maps.Animation.DROP,
     position: pos,
     map: map,
     label: teller.toString()
   });
-
 }
-
 }
