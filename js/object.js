@@ -3,11 +3,23 @@ var data = '[{"herre":"1","tid_sondag":"07.00 - 23.15","pissoir_only":"NULL","st
 
 function load(){
 var mydata = JSON.parse(data);
+var pos1 = {lat: parseFloat(mydata[0].latitude), lng: parseFloat(mydata[0].longitude)};
+var map = new google.maps.Map(document.getElementById('map'), {
+  zoom: 14,
+  center:pos1
+});
 for(var i =0; i < mydata.length; i++){
-  var a =  mydata[i].plassering;
+  var teller = i + 1;
+  var a =  teller.toString() + ". " + mydata[i].plassering;
   var b = document.getElementById("test").innerHTML
+  var pos = {lat: parseFloat(mydata[i].latitude), lng: parseFloat(mydata[i].longitude)};
   document.getElementById("test").innerHTML = b + a + "<br>";
-  console.log(a);
+  var marker = new google.maps.Marker({
+    position: pos,
+    map: map,
+    label: teller.toString()
+  });
 
 }
+
 }
