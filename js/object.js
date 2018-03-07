@@ -11,9 +11,9 @@ var map = new google.maps.Map(document.getElementById('map'), {
 for(var i =0; i < mydata.length; i++){
   var teller = i + 1;
   var a =  teller.toString() + ". " + mydata[i].plassering;
-  var b = document.getElementById("test").innerHTML
+  var b = document.getElementById("toalettListe").innerHTML
   var pos = {lat: parseFloat(mydata[i].latitude), lng: parseFloat(mydata[i].longitude)};
-  document.getElementById("test").innerHTML = b + a + "<br>";
+  document.getElementById("toalettListe").innerHTML = b + a + "<br>";
   var marker = new google.maps.Marker({
     animation: google.maps.Animation.DROP,
     position: pos,
