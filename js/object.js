@@ -22,3 +22,102 @@ for(var i =0; i < mydata.length; i++){
   });
 }
 }
+
+function hurtigsøk(søkeobj){
+  var obj = søkeobj;
+  var mydata = JSON.parse(data);
+  var pos1 = {lat: parseFloat(mydata[0].latitude), lng: parseFloat(mydata[0].longitude)};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 14,
+    center:pos1
+  });
+  document.getElementById('toalettListe').innerHTML = "";
+  for(var i =0; i < mydata.length; i++){
+    var teller = i + 1;
+    var a =  teller.toString() + ". " + mydata[i].plassering;
+    var b = document.getElementById("toalettListe").innerHTML;
+    var pos = {lat: parseFloat(mydata[i].latitude), lng: parseFloat(mydata[i].longitude)};
+    if(mydata[i].plassering == obj.plassering){
+      document.getElementById("toalettListe").innerHTML = b+ a + "<br>";
+    var marker = new google.maps.Marker({
+      animation: google.maps.Animation.DROP,
+      position: pos,
+      map: map,
+      label: teller.toString()
+    });
+  }
+  if(obj.kjønn == "herre")
+  if(mydata[i].herre == 1){
+    document.getElementById("toalettListe").innerHTML = b+ a + "<br>";
+  var marker = new google.maps.Marker({
+    animation: google.maps.Animation.DROP,
+    position: pos,
+    map: map,
+    label: teller.toString()
+  });
+}
+  }
+
+}
+
+function test(){
+  var uri = decodeURIComponent(document.location.href);
+  var result = [];
+  var query_string="";
+  var k = 0;
+
+  if (uri.indexOf("=") < 0)
+      return result;
+  query_string = uri.substring(uri.indexOf("=")+1);
+  if (query_string.indexOf("#") >= 0)
+      query_string = query_string.substring(0, query_string.indexOf("#"));
+  var l = query_string.length;
+  for(var i = 0; i < l; i++){
+      if (query_string.indexOf("+") < 0){
+        result[k] = query_string;
+        console.log("resultat: " + result[k]);
+        break;
+    }
+
+    i = query_string.indexOf("+");
+    result[k] = query_string.substring(0,i);
+    console.log("resultat: " + result[k]);
+    query_string = query_string.substring(i+1,l);
+
+    k = k +1;
+
+  }
+
+
+  var søk ={};
+
+
+  for(var i = 0; i < result.length;i++){
+    if(result[i].match(/(plassering)/)){
+      søk.plassering = result[i].substring(result[i].indexOf(":")+1);
+    }
+    if(result[i].match(/(adresse)/)){
+      søk.adresse = result[i].substring(result[i].indexOf(":")+1);
+    }
+    if(result[i].match(/(kjønn)/)){
+      søk.kjønn = result[i].substring(result[i].indexOf(":")+1);
+    }
+    if(result[i].match(/(tid)/)){
+      søk.tid = result[i].substring(result[i].indexOf(":")+1);
+    }
+    if(result[i].match(/(pissoir_only)/)){
+      søk.pissoir_only = result[i].substring(result[i].indexOf(":")+1);
+    }
+    if(result[i].match(/(stellerom)/)){
+      søk.stellerom = result[i].substring(result[i].indexOf(":")+1);
+    }
+    if(result[i].match(/(pris)/)){
+      søk.pris = result[i].substring(result[i].indexOf(":")+1);
+    }
+    if(result[i].match(/(rullestol)/)){
+      søk.rullestol = result[i].substring(result[i].indexOf(":")+1);
+    }
+  }
+  console.log(søk);
+  hurtigsøk(søk);
+}
