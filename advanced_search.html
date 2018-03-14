@@ -15,12 +15,10 @@
           <a href="Toaletter.html">Toaletter i Bergen!</a>
           <a href="informasjon.html">Mer informasjon om utesteder</a>
           <a href="advanced_search.html">Avansert Søk</a>
-        <li><div>
           <form class="newsearch" method="get" action="Toaletter.html">
             <input type="text" id="toalett" name="toalett" size="21" maxlength="100" placeholder="Search...">
             <input type="submit" value="Search" class="button">
-          </form></div>
-        </li>
+          </form>
       </nav>
       <h1>Advanced search</h1>
       <div class="kasse">
@@ -30,24 +28,25 @@
 				</div>
 			<fieldset>
 				<div>
-					<label for="kjonnlabel">Mann</label>
-					<input id="kjonnlabel" name="kjonnlabel" type="checkbox">
+          <h3> Kjønn: </h3>
+					<label for="kjønn">Mann</label>
+					<input id="kjønn" name="kjønn" type="checkbox">
 				</div>
         <div>
-					<label for="kjonnlabel">Dame</label>
-					<input id="kjonnlabel" name="kjonnlabel" type="checkbox">
+					<label for="kjønnd">Dame</label>
+					<input id="kjønnd" name="kjønnd" type="checkbox">
 				</div>
         <div>
-					<label for="kjonnlabel">Transeksuell</label>
-					<input id="kjonnlabel" name="kjonnlabel" type="checkbox">
+					<label for="kjønnt">Transeksuell</label>
+					<input id="kjønnt" name="kjønnt" type="checkbox">
 				</div>
 				<div>
-					<label for="rullestoltilgang">Rullestoltilgang</label>
-					<input id="rullestoltilgang" name="rullestoltilgang" type="checkbox">
+					<label for="rullestol">Rullestoltilgang</label>
+					<input id="rullestol" name="rullestol" type="checkbox">
 				</div>
 				<div>
-					<label for="aapennaa">Åpen nå?</label>
-					<input id="aapennaa" name="aapennaa" type="checkbox">
+					<label for="tid">Åpen nå?</label>
+					<input id="tid" name="tid" type="checkbox">
 				</div>
         <!--   <div>
          <label for="gratis">Gratis</label>
@@ -58,15 +57,20 @@
             <input id="stellerom" name="stellerom" type="checkbox">
           </div>
           <div>
-					<label for="aapningstid">Åpningstid</label>
-					<input id="aapningstid" name="aapningstid" type="text" placeholder="Jess?">
+          <label for="pissoir">Pissoir</label>
+          <input id="pissoir" name="pissoir" type="checkbox">
+          </div>
+          <div>
+					<label for="tid">Åpningstid</label>
+					<input id="tid" name="tid" type="text" placeholder="">
 				</div>
-        <div>
           <div>
           <label for="plassering">Plassering</label>
-          <input id="plassering" name="plassering" type="text" placeholder="kuk?">
+          <input id="plassering" name="plassering" type="text" placeholder="f.eks Nonneseter">
         </div>
-          <label for="pris">Maksimum Pris</label>
+        <div>
+          <!-- dette må gjøres noko med-->
+          <label for="pris">Pris</label>
           <select>
   	  <optgroup label="Maks pris">
           <option value = "0 kr">0</option>
