@@ -120,4 +120,21 @@ function test(){
   }
   console.log(søk);
   hurtigsøk(søk);
+  return søk;
 }
+
+function match(){
+  var k = test();
+  var result = {};
+  var mydata = JSON.parse(data);
+
+    for(var x in k){
+      for(var i in mydata){
+        if(k[x] == mydata[i][x]){
+        console.log("første " + k[x] + " andre " +mydata[i][x]);
+        console.log(mydata[i][x]);
+      }
+      }
+
+    }
+  }
