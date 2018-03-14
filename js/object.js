@@ -10,18 +10,20 @@ var map = new google.maps.Map(document.getElementById('map'), {
 });
 for(var i =0; i < mydata.length; i++){
   var teller = i + 1;
-  var a =  teller.toString() + ". " + mydata[i].plassering;
+  var a =  teller.toString() + " " + mydata[i].plassering +" Adresse: " + mydata[i].adresse;
   var b = document.getElementById("toalettListe").innerHTML
   var pos = {lat: parseFloat(mydata[i].latitude), lng: parseFloat(mydata[i].longitude)};
   document.getElementById("toalettListe").innerHTML = b + a + "<br>";
   var marker = new google.maps.Marker({
     animation: google.maps.Animation.DROP,
+    animation: google.maps.Animation.BOUNCE,
     position: pos,
     map: map,
     label: teller.toString()
   });
+  }
 }
-}
+
 
 function hurtigsøk(søkeobj){
   var obj = søkeobj;
