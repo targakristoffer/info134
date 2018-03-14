@@ -94,28 +94,28 @@ function test(){
 
   for(var i = 0; i < result.length;i++){
     if(result[i].match(/(plassering)/)){
-      søk.plassering = result[i].substring(result[i].indexOf(":")+1);
+      søk.plassering = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
     if(result[i].match(/(adresse)/)){
-      søk.adresse = result[i].substring(result[i].indexOf(":")+1);
+      søk.adresse = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
     if(result[i].match(/(kjønn)/)){
-      søk.kjønn = result[i].substring(result[i].indexOf(":")+1);
+      søk.kjønn = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
     if(result[i].match(/(tid)/)){
-      søk.tid = result[i].substring(result[i].indexOf(":")+1);
+      søk.tid = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
     if(result[i].match(/(pissoir_only)/)){
-      søk.pissoir_only = result[i].substring(result[i].indexOf(":")+1);
+      søk.pissoir_only = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
     if(result[i].match(/(stellerom)/)){
-      søk.stellerom = result[i].substring(result[i].indexOf(":")+1);
+      søk.stellerom = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
     if(result[i].match(/(pris)/)){
-      søk.pris = result[i].substring(result[i].indexOf(":")+1);
+      søk.pris = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
     if(result[i].match(/(rullestol)/)){
-      søk.rullestol = result[i].substring(result[i].indexOf(":")+1);
+      søk.rullestol = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
   }
   console.log(søk);
