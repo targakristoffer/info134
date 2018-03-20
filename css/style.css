@@ -1,39 +1,34 @@
 body{
-  background: #232526;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: #232526;
+background: -webkit-linear-gradient(to left, #414345, #232526);
+background: linear-gradient(to left, #414345, #232526);
   margin: 0;
   margin-top:10px;
   padding: 70px 0px 0px 0px;
   height: 100%;
-  	font-family: 'New Rocker', cursive;
+  font-family: 'New Rocker', cursive;
 }
+
 p{
   color: white;
 }
+
 label{
   color: white;
 }
+
 h1,h2,h3{
   color:white;
 }
-footer{
-    	padding: 20px 0 20px;
-    	right: 0;
-    	bottom: 0;
-    	left: 0;
-    	text-align: center;
-    }
-.pic{
-  width:200px;
-  height:auto;
-}
+
 a{
   text-decoration: none;
 }
+
 a:hover{
   background-color: orange;
 }
+
 nav{
 	font-family: 'New Rocker', cursive;
 	background-color: rgba(135,135,135,0.9);
@@ -45,16 +40,19 @@ nav{
 	padding-bottom:20px;
 	z-index:1;
 }
+
 nav a{
   margin-right: 50px;
 }
-.kasse{
-  display: flex;
-  flex: wrap;
-  justify-content: center;
-  align-items: center;
-  padding-top: 50px;
+
+footer{
+  padding: 20px 0 20px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	text-align: center;
 }
+
 #fotballpuben, #heidis, #lille, #vaskeriet, #bryggen{
     margin: 0 auto;
     margin-right: auto;
@@ -65,17 +63,50 @@ nav a{
     padding-bottom: 0px;
     padding-left: 20px;
 }
-#map {
-    height: 600px;
-    width: 50%;
-    }
-    .newsearch{
-        float: right;
-        padding: 10px 10px 10px 10px;
-    }
-    .button{
-        cursor: pointer;
-    }
-#toalettListe{
 
+#map{
+    height: 350px;
+    width: 70%;
+    }
+.newsearch{
+    float: right;
+    padding: 10px 10px 10px 10px;
+    }
+.button{
+    cursor: pointer;
+}
+
+.pic{
+  width:200px;
+  height:auto;
+}
+
+.kasse{
+  display: flex;
+ flex: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.flexkasse{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+
+@media(max-width: 700px){
+  .pic{
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  .kasse{
+    display: block;
+  }
+  #map{
+      height: 250px;
+      }
 }
