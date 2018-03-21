@@ -2,16 +2,12 @@ var data = '[{"herre":"1","tid_sondag":"07.00 - 23.15","pissoir_only":"NULL","st
 
 function check_method(){
   var uri = decodeURIComponent(document.location.href);
-  var tall = uri.indexOf("?");
   var regex = new RegExp( "toalett", 'g' );
   var regex2 = new RegExp( "advanced=Search", 'g');
-  console.log(tall);
   if (uri.substring(uri.indexOf("?")+1).match(regex)){
-    console.log("HAIGAW");
       return match_search(2);
     }
   if (uri.substring(uri.indexOf("?")+1).match(regex2)){
-    console.log("OSJAMS");
       return match_search(1);
     }
    return full_load();
@@ -28,12 +24,10 @@ for(var i =0; i < mydata.length; i++){
   var teller = i + 1;
   var a =  teller.toString() + " " + mydata[i].plassering +" Adresse: " + mydata[i].adresse;
   var b = document.getElementById("toalettListe").innerHTML
-  console.log
   var pos = {lat:parseFloat(mydata[i].latitude), lng:parseFloat(mydata[i].longitude)};
   document.getElementById("toalettListe").innerHTML = b + a + "<br>";
   var marker = new google.maps.Marker({
     animation: google.maps.Animation.DROP,
-    animation: google.maps.Animation.BOUNCE,
     position: pos,
     map: map,
     label: teller.toString()
@@ -41,11 +35,8 @@ for(var i =0; i < mydata.length; i++){
   }
 }
 
-function hurtigsøk(søkeobj){
+function fill_map(søkeobj){
   var obj = søkeobj;
-  for(var i = 0; i < obj.length;i++){
-    console.log("a: "+obj[i]);
-  }
   var teller = 1;
   var mydata = JSON.parse(data);
   var pos1 = {lat:60.395946, lng:5.325745};
@@ -67,14 +58,14 @@ function hurtigsøk(søkeobj){
       map: map,
       label: teller.toString()
     });
-    console.log(teller);
+
     teller = teller + 1;
   }
   }
   }
 }
 
-function test(){
+function fast_search(){
   var uri = decodeURIComponent(document.location.href);
   var result = [];
   var query_string="";
@@ -89,13 +80,11 @@ function test(){
   for(var i = 0; i < l; i++){
       if (query_string.indexOf("+") < 0){
         result[k] = query_string;
-        console.log("resultat: " + result[k]);
         break;
     }
 
     i = query_string.indexOf("+");
     result[k] = query_string.substring(0,i);
-    console.log("resultat: " + result[k]);
     query_string = query_string.substring(i+1,l);
 
     k = k +1;
@@ -150,17 +139,14 @@ function advanced(){
   query_string = uri.substring(uri.indexOf("?")+1);
   if (query_string.indexOf("#") >= 0)
       query_string = query_string.substring(0, query_string.indexOf("#"));
-      console.log(query_string);
   var l = query_string.length;
   for(var i = 0; i < l; i++){
       if (query_string.indexOf("&") < 0){
         result[k] = query_string;
-        console.log("resultatASD: " + result[k]);
         break;
     }
     i = query_string.indexOf("&");
     result[k] = query_string.substring(0,i);
-    console.log("resultatTYU: " + result[k]);
     query_string = query_string.substring(i+1,l);
 
     k = k +1;
@@ -198,7 +184,7 @@ for(var i = 0; i < result.length;i++){
   }
 }
   if(result[i].match(/(pris)/)){
-    søk.pris = result[i].substring(result[i].indexOf("=")+1).toUpperCase();
+    søk.pris = result[i].substring(result[i].indexOf("=")+1);
   }
 
   if(result[i].match(/(rullestol)/)){
@@ -215,7 +201,6 @@ return søk;
 function isEmpty(obj) {
     for(var prop in obj) {
         if(obj.hasOwnProperty(prop)){
-          console.log("er ikke tom");
             return false;
           }
         }
@@ -228,12 +213,12 @@ var k = {};
    k = advanced();
  }
   if(search_method == 2){
-     k = test();
+     k = fast_search();
    }
-   console.log(k);
 if(isEmpty(k)){
   return full_load();
 }
+console.log(k);
   var result = [];
   var mydata = JSON.parse(data);
   var teller = 0;
@@ -249,7 +234,7 @@ if(isEmpty(k)){
       }
     }
     result = find_common(arr);
-    hurtigsøk(result);
+    fill_map(result);
   }
 
 function find_common(arr){
