@@ -3,24 +3,25 @@ var data = '[{"herre":"1","tid_sondag":"07.00 - 23.15","pissoir_only":"NULL","st
 
 function load(){
 var mydata = JSON.parse(data);
-var pos1 = {lat: parseFloat(mydata[0].latitude), lng: parseFloat(mydata[0].longitude)};
+var pos1 = {lat:60.395343, lng:5.325745};
 var map = new google.maps.Map(document.getElementById('map'), {
   zoom: 14,
   center:pos1
 });
 for(var i =0; i < mydata.length; i++){
   var teller = i + 1;
-  var a =  teller.toString() + ". " + mydata[i].plassering;
+  var a =  teller.toString() + " " + mydata[i].plassering +" Adresse: " + mydata[i].adresse;
   var b = document.getElementById("toalettListe").innerHTML
   var pos = {lat: parseFloat(mydata[i].latitude), lng: parseFloat(mydata[i].longitude)};
   document.getElementById("toalettListe").innerHTML = b + a + "<br>";
   var marker = new google.maps.Marker({
     animation: google.maps.Animation.DROP,
+    animation: google.maps.Animation.BOUNCE,
     position: pos,
     map: map,
     label: teller.toString()
   });
-}
+  }
 }
 
 function hurtigsøk(søkeobj){
