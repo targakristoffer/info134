@@ -25,6 +25,7 @@ for(var i =0; i < mydata.length; i++){
 }
 
 function hurtigsøk(søkeobj){
+  console.log("funket" + søkeobj[0]);
   var obj = søkeobj;
   var mydata = JSON.parse(data);
   var pos1 = {lat: parseFloat(mydata[0].latitude), lng: parseFloat(mydata[0].longitude)};
@@ -38,7 +39,8 @@ function hurtigsøk(søkeobj){
     var a =  teller.toString() + ". " + mydata[i].plassering;
     var b = document.getElementById("toalettListe").innerHTML;
     var pos = {lat: parseFloat(mydata[i].latitude), lng: parseFloat(mydata[i].longitude)};
-    if(mydata[i].plassering == obj.plassering){
+    for(var j= 0; j < obj.length; j++){
+    if(mydata[i].plassering == obj[j]){
       document.getElementById("toalettListe").innerHTML = b+ a + "<br>";
     var marker = new google.maps.Marker({
       animation: google.maps.Animation.DROP,
@@ -47,18 +49,8 @@ function hurtigsøk(søkeobj){
       label: teller.toString()
     });
   }
-  if(obj.kjønn == "herre")
-  if(mydata[i].herre == 1){
-    document.getElementById("toalettListe").innerHTML = b+ a + "<br>";
-  var marker = new google.maps.Marker({
-    animation: google.maps.Animation.DROP,
-    position: pos,
-    map: map,
-    label: teller.toString()
-  });
-}
   }
-
+  }
 }
 
 function test(){
@@ -92,17 +84,21 @@ function test(){
 
   var søk ={};
 
-
   for(var i = 0; i < result.length;i++){
     if(result[i].match(/(plassering)/)){
       søk.plassering = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
     if(result[i].match(/(adresse)/)){
-      søk.adresse = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
+      søk.adresse = result[i].substring(result[i].indexOf(":")+1);
     }
     if(result[i].match(/(kjønn)/)){
-      søk.kjønn = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
+      if(result[i].substring(result[i].indexOf(":")+1).toUpperCase() == "HERRE"){
+        søk.herre = 1;
+      }
+      if(result[i].substring(result[i].indexOf(":")+1).toUpperCase() == "DAME"){
+        søk.dame=1;
     }
+  }
     if(result[i].match(/(tid)/)){
       søk.tid = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
@@ -119,6 +115,52 @@ function test(){
       søk.rullestol = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
   }
-  console.log(søk);
-  hurtigsøk(søk);
+  return søk;
+}
+
+function match(){
+  var k = test();
+  var result = [];
+  var mydata = JSON.parse(data);
+  var teller = 0;
+  var arr=[[]];
+
+    for(var x in k){
+      for(var i in mydata){
+        var regex = new RegExp( k[x], 'g' );
+        if(mydata[i][x].match(regex)){
+        arr[teller][i] = mydata[i].plassering;
+        console.log(arr[teller][i]);
+      }
+      else{
+        arr[teller][i] = null;
+        console.log(arr[teller][i]);
+      }
+      }
+      teller = teller +1;
+      arr[teller]=[];
+    }
+    if(arr[1] == null){
+      console.log(" asdasda ");
+    hurtigsøk(arr);
+  }
+  else{
+    result = find_common(arr);
+    hurtigsøk(result);
+  }
+  }
+
+function find_common(arr){
+  var result = [];
+  var teller = 0;
+  for(var i = 0; i < arr.length; i ++){
+    for(var j = 0; j < arr[i].length; j++){
+      if((arr[i][j] == arr[i+1][j] )&& (arr[i][j] != null)){
+        result[teller] = arr[i][j];
+        console.log("gei " + result[teller]);
+        teller = teller + 1;
+      }
+    }
+  }
+  return result;
 }
