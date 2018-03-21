@@ -98,11 +98,7 @@ footer{
 }
 
 @media(max-width: 700px){
-  .pic{
-    width: 100%;
-    display: block;
-    margin: 0 auto;
-  }
+
   .kasse{
     display: block;
   }
