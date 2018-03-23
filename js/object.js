@@ -93,8 +93,7 @@ function fast_search(){
 
 
   var søk ={};
-
-
+  
   for(var i = 0; i < result.length;i++){
     if(result[i].match(/(plassering)/)){
       søk.plassering = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
