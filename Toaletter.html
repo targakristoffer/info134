@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
       <link href="https://fonts.googleapis.com/css?family=New+Rocker" rel="stylesheet">
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE&callback=load">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE">
     </script>
     <script type ="text/javascript" src="js/object.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -23,8 +23,75 @@
       <input type="submit" value="Search" class="button">
     </form>
 </nav>
-        <h1>Kart over Bergen</h1>
+        <h1>Kart og søk på toaletter i Bergen</h1>
         <div class="flexkasse">
+          <form id="search" action="Toaletter.html" method="get">
+      <h2>Her blir det mulig å søke etter toaletter basert på valgene under</h2>
+    <fieldset>
+      <div>
+        <h3> Kjønn: </h3>
+        <label for="kjønn">Mann</label>
+        <input id="kjønn" name="kjønnHerre" type="checkbox">
+      </div>
+      <div>
+        <label for="kjønn">Dame</label>
+        <input id="kjønn" name="kjønnDame" type="checkbox">
+      </div>
+      <div>
+        <label for="rullestol">Rullestoltilgang</label>
+        <input id="rullestol" name="rullestol" type="checkbox">
+      </div>
+      <div>
+        <label for="tid">Åpen nå?</label>
+        <input id="tid" name="tid" type="checkbox">
+      </div>
+        <div>
+          <label for="stellerom">Stellerom</label>
+          <input id="stellerom" name="stellerom" type="checkbox">
+        </div>
+        <div>
+        <label for="pissoir">Pissoir</label>
+        <input id="pissoir" name="pissoir_only" type="checkbox">
+        </div>
+        <div>
+        <label for="plassering">Plassering</label>
+        <input id="plassering" name="plassering" type="text" placeholder="f.eks Nonneseter">
+      </div>
+      <div>
+      <label for="maksPris">Maks pris</label>
+      <input id="maksPris" name="maksPris" type="text" placeholder="f.eks 10 kr">
+    </div>
+  <div>
+    <label for="Åpen">Tid <select id="tid">
+      <option value="ingenvalg">Velg tid</option>
+      <option value="0">00:00</option>
+      <option value="1">01:00</option>
+      <option value="2">02:00</option>
+      <option value="3">03:00</option>
+      <option value="4">04:00</option>
+      <option value="5">05:00</option>
+      <option value="6">06:00</option>
+      <option value="7">07:00</option>
+      <option value="8">08:00</option>
+      <option value="9">09:00</option>
+      <option value="10">10:00</option>
+      <option value="11">11:00</option>
+      <option value="12">12:00</option>
+      <option value="13">13:00</option>
+      <option value="14">14:00</option>
+      <option value="15">15:00</option>
+      <option value="16">16:00</option>
+      <option value="17">17:00</option>
+      <option value="18">18:00</option>
+      <option value="19">19:00</option>
+      <option value="20">20:00</option>
+      <option value="21">21:00</option>
+      <option value="22">22:00</option>
+      <option value="23">23:00</option>
+    </select></div>
+    </fieldset>
+    <input type="submit" id="submit_search"  value="Search" name="advanced">
+  </form>
     <h2> Liste over tilgjengelige toaletter</h2>
     <p id ="toalettListe">
         <div id="map"></div>
