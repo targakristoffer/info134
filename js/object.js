@@ -305,12 +305,12 @@ function velgFavorittToalett() {
     var x = document.createElement("SELECT");
     x.setAttribute("id", "mySelect");
     document.body.appendChild(x);
-
+    console.log(jsonData.entries[0].plassering);
+    for(var i = 0;i<jsonData.entries.length ;i++){
     var z = document.createElement("option");
-    z.setAttribute("value", "volvocar");
-    var t = document.createTextNode("a");
-    var s = document.createTextNode("aasdf");
+    z.setAttribute("value", "Toaletter");
+    var t = document.createTextNode(jsonData.entries[i].plassering);
     z.appendChild(t);
-    z.appendChild(s);
     document.getElementById("mySelect").appendChild(z);
+  }
 }

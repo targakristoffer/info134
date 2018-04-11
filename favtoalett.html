@@ -6,8 +6,11 @@
     <script type ="text/javascript" src="js/object.js"></script>
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css?family=New+Rocker" rel="stylesheet">
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE">
+    </script>
   </head>
-  <body>
+  <body onload = "get_data('https://hotell.difi.no/api/json/bergen/dokart?')">
   <nav>
     <a href="index.html">Forside</a>
     <a href="Toaletter.html">Toaletter</a>
@@ -25,7 +28,7 @@
 <h1>Her kan du velge ditt favoritt toalett!</h1>
     <p>Velg favoritt toalettet ditt under og finn ut av det som er i nærheten.</p>
     <button onclick="velgFavorittToalett()">Velg her!</button>
-  </div>
+    <div id = "map"></div>
 </body>
   <footer>
     <p>
