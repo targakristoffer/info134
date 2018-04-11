@@ -291,3 +291,16 @@ function find_common(arr){
   }
   return new_result;
 }
+function velgFavorittToalett() {
+    var x = document.createElement("SELECT");
+    x.setAttribute("id", "mySelect");
+    document.body.appendChild(x);
+
+    var z = document.createElement("option");
+    z.setAttribute("value", "volvocar");
+    var t = document.createTextNode("a");
+    var s = document.createTextNode("aasdf");
+    z.appendChild(t);
+    z.appendChild(s);
+    document.getElementById("mySelect").appendChild(z);
+}
