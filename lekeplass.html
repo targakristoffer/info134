@@ -4,9 +4,14 @@
     <title>Lekeplass</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta charset="utf-8">
+    <script type ="text/javascript" src="js/lekeobj.js"></script>
+    <script type ="text/javascript" src="js/object.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE">
+    </script>
     <link href="https://fonts.googleapis.com/css?family=New+Rocker" rel="stylesheet">
   </head>
-  <body>
+  <body onload = "get_data('https://hotell.difi.no/api/json/bergen/lekeplasser?')">
   <nav>
     <a href="index.html">Forside</a>
     <a href="Toaletter.html">Toaletter</a>
@@ -22,15 +27,8 @@
 </nav>
 <h1>Kart og kule ting om lekeplasser hvor man kan regne distanse mellom alles favoritt lekeplasser</h1>
 <div class="flexkasse">
-  <p> Her skal det være et kart og ting man kan gjøre</p>
-    <p> Her skal det være et kart og ting man kan gjøre</p>
-      <p> Her skal det være et kart og ting man kan gjøre</p>
-        <p> Her skal det være et kart og ting man kan gjøre</p>
-          <p> Her skal det være et kart og ting man kan gjøre</p>
-            <p> Her skal det være et kart og ting man kan gjøre</p>
-              <p> Her skal det være et kart og ting man kan gjøre</p>
-                <p> Her skal det være et kart og ting man kan gjøre</p>
-                  <p> Her skal det være et kart og ting man kan gjøre</p>
+  <p id ="Liste"></p>
+  <div id = "map"></div>
                 </div>
 </body>
 <footer>
