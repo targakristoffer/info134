@@ -57,7 +57,11 @@ var map = new google.maps.Map(document.getElementById('map'), {
 for(var i =0; i < jsonData.entries.length; i++){
   var teller = i + 1;
   var a =  teller.toString() + " " + jsonData.entries[i].plassering +" Adresse: " + jsonData.entries[i].adresse;
+<<<<<<< HEAD
+  var b = document.getElementById("toalettListe").innerHTML;
+=======
   var b = document.getElementById("Liste").innerHTML
+>>>>>>> 8cf325ecdc840692a899ffa03398b39b8ac058ea
   var pos = {lat:parseFloat(jsonData.entries[i].latitude), lng:parseFloat(jsonData.entries[i].longitude)};
   document.getElementById("Liste").innerHTML = b + a + "<br>";
   var marker = new google.maps.Marker({
