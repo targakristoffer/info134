@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bergen uteliv</title>
+    <title>favoritt toalett</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type ="text/javascript" src="js/object.js"></script>
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css?family=New+Rocker" rel="stylesheet">
   </head>
@@ -13,7 +14,7 @@
     <a href="informasjon.html">Utesteder</a>
     <a href ="lekeplass.html">Lekeplasser</a>
     <a href ="favtoalett.html">Ditt favoritt toalett</a>
-    <a href ="ubestemtåpendata.html"> Åpen data ting </a>
+    <a href ="ubestemtåpendata.html"> Åpen data ting</a>
     <a href="advanced_search.html">Avansert Søk</a>
     <form class="newsearch" method="get" action="Toaletter.html">
       <input type="text" id="toalett" name="toalett" size="21" maxlength="100" placeholder="Search...">
@@ -21,11 +22,11 @@
     </form>
 </nav>
     <div class="flexkasse">
-<h1>Bergens kuleste offentlige toaletter og utesteder</h1>
-<img src="media/focal.jpg" alt="Bilde av bryggen i Bergen">
-    <p>På denne nettsiden er det informasjon om de kuleste offentlige toalettene i Bergen og et par artige utesteder.</p>
-</div>
-  </body>
+<h1>Her kan du velge ditt favoritt toalett!</h1>
+    <p>Velg favoritt toalettet ditt under og finn ut av det som er i nærheten.</p>
+    <button onclick="velgFavorittToalett()">Velg her!</button>
+  </div>
+</body>
   <footer>
     <p>
     Nettside om de 5 kuleste utestedene i Bergen
