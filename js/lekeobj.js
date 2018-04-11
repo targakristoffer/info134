@@ -6,7 +6,7 @@ function tilRadianer(grader) {
 
 // Kalkulerer en distanse mellom to lokasjoner i km,
 // tar inn longitude og latitude som argumenter
-function kalkulerDistanse(long1, lat1, long2, lat2) {
+function kalkulerDistanse(lat1, long1, lat2, long2) {
 
   // Jordas radius i km
   var jordasRadius = 6371;
