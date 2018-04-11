@@ -44,7 +44,10 @@ nav{
 nav a{
   margin-right: 50px;
 }
-
+select{
+  position: absolute;
+  
+}
 footer{
 position: absolute;
   padding: 20px 0 20px;
