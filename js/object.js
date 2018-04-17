@@ -56,10 +56,14 @@ var map = new google.maps.Map(document.getElementById('map'), {
 });
 for(var i =0; i < jsonData.entries.length; i++){
   var teller = i + 1;
-  var a =  teller.toString() + " " + jsonData.entries[i].plassering +" Adresse: " + jsonData.entries[i].adresse;
-  var b = document.getElementById("Liste").innerHTML
+  var a =  jsonData.entries[i].plassering +" Adresse: " + jsonData.entries[i].adresse;
   var pos = {lat:parseFloat(jsonData.entries[i].latitude), lng:parseFloat(jsonData.entries[i].longitude)};
-  document.getElementById("Liste").innerHTML = b + a + "<br>";
+  var ol = document.getElementById("liste");
+  var li = document.createElement("li");
+
+  li.innerHTML = a;
+  ol.appendChild(li);
+
   var marker = new google.maps.Marker({
     animation: google.maps.Animation.DROP,
     position: pos,
@@ -77,14 +81,19 @@ function fill_map(søkeobj){
     zoom: 14,
     center:pos1
   });
-  document.getElementById('toalettListe').innerHTML = "";
+
   for(var i =0; i < jsonData.entries.length; i++){
-    var a =  teller.toString() + ". " + jsonData.entries[i].plassering;
-    var b = document.getElementById("toalettListe").innerHTML;
+    var a = jsonData.entries[i].plassering;
     var pos = {lat: parseFloat(jsonData.entries[i].latitude), lng: parseFloat(jsonData.entries[i].longitude)};
+
+    var ol = document.getElementById("liste");
+    var li = document.createElement("li");
+
+
     for(var j= 0; j < obj.length; j++){
     if(jsonData.entries[i].plassering == obj[j]){
-      document.getElementById("toalettListe").innerHTML = b+ a + "<br>";
+      li.innerHTML = a;
+      ol.appendChild(li);
     var marker = new google.maps.Marker({
       animation: google.maps.Animation.DROP,
       position: pos,
