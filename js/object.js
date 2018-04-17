@@ -72,10 +72,6 @@ for(var i =0; i < jsonData.entries.length; i++){
   }
 }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 30c866ab42051bbd2c72d525e4085642b7f9d7b7
 function fill_map(søkeobj){
   var obj = søkeobj;
   var teller = 1;
