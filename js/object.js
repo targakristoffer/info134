@@ -70,6 +70,8 @@ for(var i =0; i < jsonData.entries.length; i++){
   else {li.innerHTML = b;
     ol.appendChild(li);
   }
+}
+}
 
 function fill_map(søkeobj){
   var obj = søkeobj;
