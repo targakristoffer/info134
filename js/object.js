@@ -57,7 +57,7 @@ var map = new google.maps.Map(document.getElementById('map'), {
 for(var i =0; i < jsonData.entries.length; i++){
   var teller = i + 1;
   var a =  jsonData.entries[i].plassering +" Adresse: " + jsonData.entries[i].adresse;
-  var b =  jsonData.entries[i].name +" Adresse: " + jsonData.entries[i].adresse;
+  var b =  jsonData.entries[i].navn +" Adresse: " + jsonData.entries[i].adresse;
   var pos = {lat:parseFloat(jsonData.entries[i].latitude), lng:parseFloat(jsonData.entries[i].longitude)};
   var ol = document.getElementById("liste");
   var li = document.createElement("li");
@@ -70,7 +70,8 @@ for(var i =0; i < jsonData.entries.length; i++){
   else {li.innerHTML = b;
     ol.appendChild(li);
   }
-
+}
+}
 function fill_map(søkeobj){
   var obj = søkeobj;
   var teller = 1;
