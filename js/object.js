@@ -315,7 +315,7 @@ function find_common(arr){
   }
   return new_result;
 }
-function velgFavorittToalett() {
+  function velgFavorittToalett() {
     var x = document.createElement("SELECT");
     x.setAttribute("id", "mySelect");
     document.body.appendChild(x);
