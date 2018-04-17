@@ -57,21 +57,19 @@ var map = new google.maps.Map(document.getElementById('map'), {
 for(var i =0; i < jsonData.entries.length; i++){
   var teller = i + 1;
   var a =  jsonData.entries[i].plassering +" Adresse: " + jsonData.entries[i].adresse;
+  var b =  jsonData.entries[i].name +" Adresse: " + jsonData.entries[i].adresse;
   var pos = {lat:parseFloat(jsonData.entries[i].latitude), lng:parseFloat(jsonData.entries[i].longitude)};
   var ol = document.getElementById("liste");
   var li = document.createElement("li");
 
-  li.innerHTML = a;
-  ol.appendChild(li);
-
-  var marker = new google.maps.Marker({
-    animation: google.maps.Animation.DROP,
-    position: pos,
-    map: map,
-    label: teller.toString()
-  });
+  if (jsonData.entries[i].plassering != undefined) {
+    li.innerHTML = a;
+    ol.appendChild(li);
   }
-}
+
+  else {li.innerHTML = b;
+    ol.appendChild(li);
+  }
 
 function fill_map(søkeobj){
   var obj = søkeobj;
