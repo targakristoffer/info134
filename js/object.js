@@ -70,12 +70,14 @@ for(var i =0; i < jsonData.entries.length; i++){
   else {li.innerHTML = b;
     ol.appendChild(li);
   }
+  var marker = new google.maps.Marker({
+     animation: google.maps.Animation.DROP,
+     position: pos,
+     map: map,
+     label: teller.toString()
+   });
 }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 30c866ab42051bbd2c72d525e4085642b7f9d7b7
 function fill_map(søkeobj){
   var obj = søkeobj;
   var teller = 1;
