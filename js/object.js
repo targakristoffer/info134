@@ -2,16 +2,8 @@
 og vanskelig å lese. Alt i alt skal koden generere et kart over Bergen med offentlige toaletter hentet fra et JSON-dokument og brukeren
 har mulighet til å søke etter adresse, kjønn, pris osv. */
 
-<<<<<<< HEAD
-var jsonData = {};
-
-function favToalett(){
-  get_data("https://hotell.difi.no/api/json/bergen/dokart?");
-}
-=======
 var jsonData ={};
 console.log(isEmpty(jsonData));
->>>>>>> ffe6fb8236fef7287b65ae5602cfc9cacecdac19
 
 function get_data(url){
   console.log(url);
@@ -420,7 +412,11 @@ function find_common(arr){
     z.appendChild(t);
     document.getElementById("mySelect").appendChild(z);
   }
-<<<<<<< HEAD
+  document.getElementById("mySelect").addEventListener("change", function(){
+  var valg = document.getElementById("mySelect");
+  var sendesVidere = valg.options[valg.selectedIndex].text;
+  lagListeMedLekeplasser(sendesVidere);
+});
 }
 
 // Kalkulerer grader til radianer
@@ -490,17 +486,3 @@ function lagListeMedLekeplasser(toalettNavn) {
   console.log(lekeplassListe);
 
 }
-=======
-    document.getElementById("mySelect").addEventListener("change", function(){
-    var valg = document.getElementById("mySelect");
-    var sendesVidere = valg.options[valg.selectedIndex].text;
-    lagListeMedLekeplasser(sendesVidere);
-});
-  }
-
-/*
-function getTest(selectObject) {
-    var value = selectObject.value;
-    console.log(selectObject);
-}*/
->>>>>>> ffe6fb8236fef7287b65ae5602cfc9cacecdac19
