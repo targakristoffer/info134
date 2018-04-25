@@ -34,13 +34,14 @@ function isJson(str) {
 
 /* Gjør om en string til et json objekt.*/
 function parse_data(json){
-  if(isEmpty(jsonData))
+  if(isEmpty(jsonData)){
   jsonData = JSON.parse(json);
+  check_method();
+}
   else {
     console.log("funka");
   jsonData2 = JSON.parse(json);
   }
-  check_method();
 }
 
 /* Ser etter hvilket type søk som er gjort (hurtig /avansert) */
@@ -401,7 +402,11 @@ function find_common(arr){
   }
   return new_result;
 }
+
+  var buttonPushed = false;
+
   function velgFavorittToalett() {
+    if(!buttonPushed){
     var t ="";
     var x = document.createElement("SELECT");
     x.setAttribute("id", "mySelect");
@@ -424,7 +429,8 @@ function find_common(arr){
   lagListeMedLekeplasser(sendesVidere);
 });
 }
-
+buttonPushed = true;
+}
 // Kalkulerer grader til radianer
 function tilRadianer(grader) {
   var resultat = grader * Math.PI/180;
@@ -462,6 +468,7 @@ function NLekeplasser() {
 function lagListeMedLekeplasser(toalettNavn) {
   console.log(jsonData);
   console.log(toalettNavn);
+  var lekeplassListe = [];
   for(var i =0; i < 14; i++){
     var teller = i + 1;
     var toalettLat = 0;
@@ -471,6 +478,12 @@ function lagListeMedLekeplasser(toalettNavn) {
     if (a == toalettNavn) {
       toalettLat = parseFloat(jsonData.entries[i].latitude);
       toalettLong = parseFloat(jsonData.entries[i].longitude);
+      for(var j = 0; j < jsonData2.entries.length; j++) {
+        console.log(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
+            jsonData2.entries[j].longitude));
+            lekeplassListe.push(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
+                jsonData2.entries[j].longitude));
+      }
       console.log("TEST1 " + a);
       console.log("TEST2" + toalettLong + "  " + toalettLat);
     }
@@ -478,16 +491,10 @@ function lagListeMedLekeplasser(toalettNavn) {
 
 
 
-  var lekeplassListe = [];
 
   console.log(jsonData2);
 
-  for(var j = 0; j < jsonData2.entries.length; j++) {
-    console.log(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
-        jsonData2.entries[j].longitude));
-        lekeplassListe.push(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
-            jsonData2.entries[j].longitude));
-  }
+
   console.log(lekeplassListe);
 
 }

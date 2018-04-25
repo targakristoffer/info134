@@ -30,10 +30,12 @@
     <p>Velg favoritt toalettet ditt under og finn ut hvor de nærmeste lekeplassene er!</p>
     <button id  = "knapp" onclick="velgFavorittToalett()">Velg her!</button>
     <script>
-    document.getElementById("knapp").addEventListener("click", function(){
+    function myfunction(){
       NLekeplasser();
-      console.log("heiiii");
-    });
+          console.log("heiiii");
+          document.getElementById("knapp").removeEventListener("click", myfunction);
+    }
+    document.getElementById("knapp").addEventListener("click", myfunction);
     </script>
     <div id = "drop"></div>
     <ol id = "liste">
