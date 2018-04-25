@@ -3,6 +3,7 @@ og vanskelig å lese. Alt i alt skal koden generere et kart over Bergen med offe
 har mulighet til å søke etter adresse, kjønn, pris osv. */
 
 var jsonData ={};
+var jsonData2 = {};
 console.log(isEmpty(jsonData));
 
 function get_data(url){
@@ -33,7 +34,12 @@ function isJson(str) {
 
 /* Gjør om en string til et json objekt.*/
 function parse_data(json){
+  if(isEmpty(jsonData))
   jsonData = JSON.parse(json);
+  else {
+    console.log("funka");
+  jsonData2 = JSON.parse(json);
+  }
   check_method();
 }
 
@@ -400,6 +406,10 @@ function find_common(arr){
     var x = document.createElement("SELECT");
     x.setAttribute("id", "mySelect");
     document.getElementById("drop").appendChild(x);
+    document.getElementById("knapp").addEventListener("click", function(){
+      NLekeplasser();
+      console.log("heiiii");
+    });
     for(var i = 0;i<jsonData.entries.length+1 ;i++){
     var z = document.createElement("option");
     z.setAttribute("id","test");
@@ -443,7 +453,6 @@ function kalkulerDistanse(lat1, long1, lat2, long2) {
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   // d kalkulerer distanse
   var d = jordasRadius * c;
-
   return d;
 }
 
@@ -451,6 +460,9 @@ function kalkulerDistanse(lat1, long1, lat2, long2) {
 // Funksjon som tar inn navnet på et toalett og finner de
 // 5 nærmeste lekeplassene i en sortert liste.
 // Returnerer listen
+function NLekeplasser() {
+  get_data("https://hotell.difi.no/api/json/bergen/lekeplasser?");
+}
 function lagListeMedLekeplasser(toalettNavn) {
   console.log(jsonData);
   console.log(toalettNavn);
@@ -468,20 +480,17 @@ function lagListeMedLekeplasser(toalettNavn) {
     }
   }
 
-  function Nlekeplasser() {
-    get_data("https://hotell.difi.no/api/json/bergen/lekeplasser?");
-  }
 
-  var lekeplasserObjekt = Nlekeplasser();
+
   var lekeplassListe = [];
 
-  console.log(lekeplasserObjekt);
+  console.log(jsonData2);
 
-  for(var j = 0; j < lekeplasserObjekt.entries.length; j++) {
-    console.log(kalkulerDistanse(toalettLat, toalettLong, lekeplasserObjekt.entries[j].latitude,
-        lekeplasserObjekt.entries[j].longitude));
-        lekeplassListe.push(kalkulerDistanse(toalettLat, toalettLong, lekeplasserObjekt.entries[j].latitude,
-            lekeplasserObjekt.entries[j].longitude));
+  for(var j = 0; j < jsonData2.entries.length; j++) {
+    console.log(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
+        jsonData2.entries[j].longitude));
+        lekeplassListe.push(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
+            jsonData2.entries[j].longitude));
   }
   console.log(lekeplassListe);
 

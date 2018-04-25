@@ -11,7 +11,7 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE">
     </script>
   </head>
-  <body onload = "NLekeplasser()">
+  <body onload = "get_data('https://hotell.difi.no/api/json/bergen/dokart?')">
   <nav>
     <a href="index.html">Forside</a>
     <a href="Toaletter.html">Toaletter</a>
@@ -28,7 +28,7 @@
 <div class="flexkasse">
 <h1>Her kan du velge ditt favoritt toalett!</h1>
     <p>Velg favoritt toalettet ditt under og finn ut hvor de nærmeste lekeplassene er!</p>
-    <button onclick="velgFavorittToalett()">Velg her!</button>
+    <button id  = "knapp" onclick="velgFavorittToalett()">Velg her!</button>
     <div id = "drop"></div>
     <ol id = "liste">
   <!--    <select id="comboA" onchange="getTest(this)">
