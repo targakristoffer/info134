@@ -406,10 +406,6 @@ function find_common(arr){
     var x = document.createElement("SELECT");
     x.setAttribute("id", "mySelect");
     document.getElementById("drop").appendChild(x);
-    document.getElementById("knapp").addEventListener("click", function(){
-      NLekeplasser();
-      console.log("heiiii");
-    });
     for(var i = 0;i<jsonData.entries.length+1 ;i++){
     var z = document.createElement("option");
     z.setAttribute("id","test");

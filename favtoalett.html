@@ -29,6 +29,12 @@
 <h1>Her kan du velge ditt favoritt toalett!</h1>
     <p>Velg favoritt toalettet ditt under og finn ut hvor de nærmeste lekeplassene er!</p>
     <button id  = "knapp" onclick="velgFavorittToalett()">Velg her!</button>
+    <script>
+    document.getElementById("knapp").addEventListener("click", function(){
+      NLekeplasser();
+      console.log("heiiii");
+    });
+    </script>
     <div id = "drop"></div>
     <ol id = "liste">
   <!--    <select id="comboA" onchange="getTest(this)">
