@@ -1,6 +1,9 @@
+/* MERK! Dette er et pågående prosjekt hvor jeg prøver meg veldig frem med kodingen og det er nokså uryddig
+og vanskelig å lese. Alt i alt skal koden generere et kart over Bergen med offentlige toaletter hentet fra et JSON-dokument og brukeren
+har mulighet til å søke etter adresse, kjønn, pris osv. */
 
 var jsonData ={};
-
+console.log(isEmpty(jsonData));
 
 function get_data(url){
   console.log(url);
@@ -54,6 +57,7 @@ var map = new google.maps.Map(document.getElementById('map'), {
   zoom: 14,
   center:pos1
 });
+
 for(var i =0; i < jsonData.entries.length; i++){
   var teller = i + 1;
   var a =  jsonData.entries[i].plassering +" Adresse: " + jsonData.entries[i].adresse;
@@ -96,7 +100,7 @@ function fill_map(søkeobj){
 
 
     for(var j= 0; j < obj.length; j++){
-    if(jsonData.entries[i].plassering == obj[j]){
+    if(jsonData.entries[i].plassering == obj[j].plassering){
       li.innerHTML = a;
       ol.appendChild(li);
     var marker = new google.maps.Marker({
@@ -148,16 +152,27 @@ function fast_search(){
     if(!result[i].match(/(\w+[:])/)){
       søk.adresse = result[i].substring(result[i].indexOf(":")+1);
     }
-    if(result[i].match(/(kjønn:)/)){
-      if(result[i].substring(result[i].indexOf(":")+1).toUpperCase() == "HERRE"){
+    if(result[i].match(/(herre:)/)){
+      if(result[i].substring(result[i].indexOf(":")+1).toUpperCase() == "1"){
         søk.herre = 1;
       }
-      if(result[i].substring(result[i].indexOf(":")+1).toUpperCase() == "DAME"){
-        søk.dame=1;
+      else {
+        søk.herre = "NULL";
+      }
+  }
+  if(result[i].match(/(dame:)/)){
+    if(result[i].substring(result[i].indexOf(":")+1).toUpperCase() == "1"){
+      søk.dame = 1;
+    }
+    else {
+      søk.dame = "NULL";
     }
   }
-    if(result[i].match(/(tid)/)){
-      søk.tid = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
+    if(result[i].match(/(åpen:)/)){
+      if(result[i].substring(result[i].indexOf(":")+1) == "nå"){
+      søk.åpen_nå = new Date().toLocaleTimeString('en-US', {hour12: false, hour:"numeric", minute: "numeric"}).replace(":",".");
+      console.log(søk.åpen_nå);
+    }
     }
     if(result[i].match(/(pissoir_only)/)){
       søk.pissoir_only = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
@@ -265,10 +280,39 @@ if(isEmpty(k)){
   return full_load();
 }
   var result = [];
-
-  var teller = 0;
   var arr=[];
 
+
+
+  for(var i = 0; i < jsonData.entries.length; i++){
+    var keys = Object.keys(k);
+    var teller = 0;
+    for(var j = 0; j < keys.length; j++){
+    /*  console.log("Keys[j]  " + keys[j]);
+      console.log("k[keys[j]]  "+k[keys[j]]);
+      console.log("keys " + keys);*/
+      if(keys[j] == "åpen_nå"){
+        console.log("lengde " + keys.length);
+        var date = new Date();
+        if(check_open(jsonData.entries[i], k[keys[j]], date.getDay())){
+          console.log("Var true");
+          teller++;
+        }
+      }
+      if(jsonData.entries[i].hasOwnProperty(keys[j])){
+        if(jsonData.entries[i][keys[j]] == k[keys[j]]){
+          teller++;
+        }
+      }
+      if(teller === keys.length){
+        arr.push(jsonData.entries[i]);
+      }
+    }
+  }
+  console.log(arr);
+  fill_map(arr);
+
+/*
     for(var x in k){
       for(var i in jsonData.entries){
         var regex = new RegExp( k[x], 'g' );
@@ -279,12 +323,48 @@ if(isEmpty(k)){
       }
     }
     result = find_common(arr);
-    fill_map(result);
+    fill_map(result);*/
+  }
+
+  function check_open(json, search_time, day){
+    if(json.tid_hverdag == "ALL" || json.tid_lordag == "ALL" || json.tid_sondag == "ALL"){
+      console.log(json.plassering +" "+json.tid_hverdag);
+      return true;
+    }
+    if(6>day>0){ //hverdag
+     var open = json.tid_hverdag.substring(0,json.tid_hverdag.indexOf(" "));
+      var close = json.tid_hverdag.substring(json.tid_hverdag.lastIndexOf(" ")+1);
+      if( open <= search_time <= close){
+      return true;
+      }
+    }
+    if(day === 6){//lørdag
+      var open = json.tid_lordag.substring(0,json.tid_lordag.indexOf(" "));
+      var close = json.tid_lordag.substring(json.tid_lordag.lastIndexOf(" ")+1);
+      if( open <= search_time <= close){
+       return true;
+      }
+    }
+    if(day === 0){//Søndag
+      var open = json.tid_sondag.substring(0,json.tid_sondag.indexOf(" "));
+      var close = json.tid_sondag.substring(json.tid_sondag.lastIndexOf(" ")+1);
+      if( open <= search_time <= close){
+       return true;
+      }
+    }
+    return false;
   }
 
 function find_common(arr){
   var result = [];
   var teller = 0;
+
+
+
+
+//Legge til en teller på en måte slik at koden sjekker om antall søkekriterier fra søkeobjektet matcher jsondataen.
+// Kan bruke søkeobjektet og legge inn en match i en ny array og sjekke lengden til den. Om lengden er lik lengden til søkeobjektet
+// så er stedet en match.
 
   for(var i = 0; i < arr.length; i++){
     for(var j = i+1; j < arr.length; j++){
