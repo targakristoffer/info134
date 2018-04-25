@@ -316,15 +316,31 @@ function find_common(arr){
   return new_result;
 }
   function velgFavorittToalett() {
+    var t ="";
     var x = document.createElement("SELECT");
     x.setAttribute("id", "mySelect");
     document.getElementById("drop").appendChild(x);
-    console.log(jsonData.entries[0].plassering);
-    for(var i = 0;i<jsonData.entries.length ;i++){
+    for(var i = 0;i<jsonData.entries.length+1 ;i++){
     var z = document.createElement("option");
+    z.setAttribute("id","test");
     z.setAttribute("value", "Toaletter");
-    var t = document.createTextNode(jsonData.entries[i].plassering);
+    if(i == 0){
+     t = document.createTextNode("velg fav");
+    }
+    else
+     t = document.createTextNode(jsonData.entries[i-1].plassering);
     z.appendChild(t);
     document.getElementById("mySelect").appendChild(z);
   }
-}
+    document.getElementById("mySelect").addEventListener("change", function(){
+    var valg = document.getElementById("mySelect");
+    var sendesVidere = valg.options[valg.selectedIndex].text;
+    lagListeMedLekeplasser(sendesVidere);
+});
+  }
+
+/*
+function getTest(selectObject) {
+    var value = selectObject.value;
+    console.log(selectObject);
+}*/
