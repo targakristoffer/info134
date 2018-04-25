@@ -1,3 +1,4 @@
+
 // Kalkulerer grader til radianer
 function tilRadianer(grader) {
   var resultat = grader * Math.PI/180;
@@ -24,4 +25,31 @@ function kalkulerDistanse(lat1, long1, lat2, long2) {
   var d = jordasRadius * c;
 
   return d;
+}
+
+function Nlekeplasser() {
+  get_data("https://hotell.difi.no/api/json/bergen/lekeplasser?");
+}
+
+// Funksjon som tar inn navnet på et toalett og finner de
+// 5 nærmeste lekeplassene i en sortert liste.
+// Returnerer listen
+function lagListeMedLekeplasser(toalettNavn) {
+
+  for(var i =0; i < jsonData.entries.length; i++){
+    var teller = i + 1;
+    var toalettLat = 0;
+    var toalettLong = 0;
+    var a =  jsonData.entries[i].plassering;
+    if (a == toalettNavn) {
+      toalettLat = parseFloat(jsonData.entries[i].latitude);
+      toalettLong = parseFloat(jsonData.entries[i].longitude);
+    }
+  }
+
+  var lekeplassListe = [];
+  for(var j = 0; j < jsonData.entries.length; j++)
+    //console.log(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
+      //  jsonData2.entries[j].longitude));
+
 }
