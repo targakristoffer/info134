@@ -459,17 +459,32 @@ function kalkulerDistanse(lat1, long1, lat2, long2) {
 }
 
 
-// Funksjon som tar inn navnet på et toalett og finner de
-// 5 nærmeste lekeplassene i en sortert liste.
-// Returnerer listen
+
 function NLekeplasser() {
   get_data("https://hotell.difi.no/api/json/bergen/lekeplasser?");
 }
+
+function sorter_lekeplasser(lekeplasser) {
+   lekeplasser.sort(function(x, y) {
+   return (x.distanse - y.distanse)
+});
+   return lekeplasser;
+}
+
+function lengdeTekst(km) {
+  if (km < 1) {
+    return Math.round(km*1000) + " meter";
+  } else return Math.round(km*100)/100 + " km"
+}
+
+// Funksjon som tar inn navnet på et toalett og finner de
+// 5 nærmeste lekeplassene i en sortert liste.
+// Returnerer listen
 function lagListeMedLekeplasser(toalettNavn) {
-  console.log(jsonData);
   console.log(toalettNavn);
-  var lekeplassListe = [];
-  for(var i =0; i < 14; i++){
+  var lekeplasser = [];
+
+  for(var i =0; i < jsonData.entries.length; i++){
     var teller = i + 1;
     var toalettLat = 0;
     var toalettLong = 0;
@@ -479,22 +494,22 @@ function lagListeMedLekeplasser(toalettNavn) {
       toalettLat = parseFloat(jsonData.entries[i].latitude);
       toalettLong = parseFloat(jsonData.entries[i].longitude);
       for(var j = 0; j < jsonData2.entries.length; j++) {
-        console.log(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
-            jsonData2.entries[j].longitude));
-            lekeplassListe.push(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
-                jsonData2.entries[j].longitude));
-      }
-      console.log("TEST1 " + a);
-      console.log("TEST2" + toalettLong + "  " + toalettLat);
+      lekeplasser[j] = {
+        navn: jsonData2.entries[j].navn,
+        distanse: kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
+            jsonData2.entries[j].longitude)
+      };
+      lekeplasser = sorter_lekeplasser(lekeplasser);
     }
   }
+}
+var lekeplasserhtml = lekeplasser.slice(0,5).map(function (element){
+  return '<li>' + lengdeTekst(element.distanse) + " " + element.navn + '</li>';
+  }).join(' ');
+  document.getElementById("lekeplasser").innerHTML = lekeplasserhtml;
 
-
-
-
-  console.log(jsonData2);
-
-
-  console.log(lekeplassListe);
-
+console.log("TEST1 " + a);
+console.log("TEST2" + toalettLong + "  " + toalettLat);
+console.log(lekeplasser.slice(0, 5));
+console.log(jsonData2);
 }
