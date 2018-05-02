@@ -1,5 +1,5 @@
 body{
-background: black;
+background: white;
   margin: 0;
   margin-top:10px;
   padding: 70px 0px 0px 0px;
@@ -8,14 +8,14 @@ background: black;
 }
 
 p,h1,h2,h3{
-  color: white;
+  color: black;
 }
 ol{
-  color:white;
+  color:black;
 }
 
 label{
-  color: white;
+  color: black;
 }
 
 a{
@@ -27,7 +27,7 @@ a:hover{
 }
 
 nav{
-	background-color: gray;
+	background-color: yellow;
 	position: fixed;
 	top: 0px;
 	width: 100vw;

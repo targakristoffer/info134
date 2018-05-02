@@ -402,8 +402,7 @@ function find_common(arr){
   }
   return new_result;
 }
-// funksjon som lager en drop down meny som henter toaletter,
-//lagrer valget og sender valget videre til funksjonen "lagListeMedLekeplasser"
+
   var buttonPushed = false;
 
   function velgFavorittToalett() {
