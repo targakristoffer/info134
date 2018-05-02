@@ -512,9 +512,4 @@ var lekeplasserhtml = lekeplasser.slice(0,5).map(function (element){
   return '<li>' + lengdeTekst(element.distanse) + " " + element.navn + '</li>';
   }).join(' ');
   document.getElementById("lekeplasser").innerHTML = lekeplasserhtml;
-
-console.log("TEST1 " + a);
-console.log("TEST2" + toalettLong + "  " + toalettLat);
-console.log(lekeplasser.slice(0, 5));
-console.log(jsonData2);
 }
