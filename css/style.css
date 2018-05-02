@@ -41,6 +41,9 @@ nav a{
   margin-left: 10px;
   margin-right: 50px;
 }
+li{
+  margin-top: 10px;
+}
 select{
   position: absolute;
 

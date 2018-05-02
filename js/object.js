@@ -143,7 +143,7 @@ function fast_search(){
 
     i = query_string.indexOf("+");
     result[k] = query_string.substring(0,i);
-    query_string = query_string.substring(i+1,l);
+    query_string = query_string.substring(i+1);
 
     k = k +1;
 
@@ -402,7 +402,8 @@ function find_common(arr){
   }
   return new_result;
 }
-
+// funksjon som lager en drop down meny som henter toaletter,
+//lagrer valget og sender valget videre til funksjonen "lagListeMedLekeplasser"
   var buttonPushed = false;
 
   function velgFavorittToalett() {
