@@ -32,12 +32,13 @@ function isJson(str) {
 
 /* Gjør om en string til et json objekt.*/
 function parse_data(json){
-  if(isEmpty(jsonData))
+  if(isEmpty(jsonData)){
   jsonData = JSON.parse(json);
+  check_method();
+}
   else {
   jsonData2 = JSON.parse(json);
   }
-  check_method();
 }
 
 /* Ser etter hvilket type søk som er gjort (hurtig /avansert) */
@@ -136,7 +137,13 @@ function fast_search(){
         break;
     }
 
+<<<<<<< HEAD
     if(query_string.match(/[a-zæøå]+[:]/)){
+=======
+    i = query_string.indexOf("+");
+    result[k] = query_string.substring(0,i);
+    query_string = query_string.substring(i+1);
+>>>>>>> da088f731bc4e253e0a4fdca8b664fd137e81697
 
       var match = /[a-zæøå]+[:]/.exec(query_string);
       if(!match.index == 0){
@@ -395,20 +402,27 @@ function find_common(arr){
   }
   return new_result;
 }
+
+  var buttonPushed = false;
+
   function velgFavorittToalett() {
+    if(!buttonPushed){
     var t ="";
     var x = document.createElement("SELECT");
     x.setAttribute("id", "mySelect");
     document.getElementById("drop").appendChild(x);
+<<<<<<< HEAD
     document.getElementById("knapp").addEventListener("click", function(){
       NLekeplasser();
     });
+=======
+>>>>>>> da088f731bc4e253e0a4fdca8b664fd137e81697
     for(var i = 0;i<jsonData.entries.length+1 ;i++){
     var z = document.createElement("option");
     z.setAttribute("id","test");
     z.setAttribute("value", "Toaletter");
     if(i == 0){
-     t = document.createTextNode("velg fav");
+     t = document.createTextNode("Tilgjengelige toaletter");
     }
     else
      t = document.createTextNode(jsonData.entries[i-1].plassering);
@@ -420,6 +434,8 @@ function find_common(arr){
   var sendesVidere = valg.options[valg.selectedIndex].text;
   lagListeMedLekeplasser(sendesVidere);
 });
+}
+buttonPushed = true;
 }
 
 // Kalkulerer grader til radianer
@@ -449,15 +465,38 @@ function kalkulerDistanse(lat1, long1, lat2, long2) {
   return d;
 }
 
-
-// Funksjon som tar inn navnet på et toalett og finner de
-// 5 nærmeste lekeplassene i en sortert liste.
-// Returnerer listen
 function NLekeplasser() {
   get_data("https://hotell.difi.no/api/json/bergen/lekeplasser?");
 }
+
+// Funksjon som sorterer lekeplasser med hensyn på distanse
+function sorter_lekeplasser(lekeplasser) {
+   lekeplasser.sort(function(x, y) {
+   return (x.distanse - y.distanse)
+});
+   return lekeplasser;
+}
+
+// Funksjon som får inn en lengde i km og returnerer en avrundet
+// verdi i meter om lengden < 1, eller km om lengden er >= 1
+function lengdeTekst(km) {
+  if (km < 1) {
+    return Math.round(km*1000) + " meter";
+  } else return Math.round(km*100)/100 + " km";
+}
+
+// Funksjon som tar inn navnet på et toalett og finner de
+// nærmeste lekeplassene i en sortert liste.
+// Returnerer listen
 function lagListeMedLekeplasser(toalettNavn) {
+<<<<<<< HEAD
   for(var i =0; i < 14; i++){
+=======
+  console.log(toalettNavn);
+  var lekeplasser = [];
+
+  for(var i =0; i < jsonData.entries.length; i++){
+>>>>>>> da088f731bc4e253e0a4fdca8b664fd137e81697
     var teller = i + 1;
     var toalettLat = 0;
     var toalettLong = 0;
@@ -466,6 +505,7 @@ function lagListeMedLekeplasser(toalettNavn) {
     if (a == toalettNavn) {
       toalettLat = parseFloat(jsonData.entries[i].latitude);
       toalettLong = parseFloat(jsonData.entries[i].longitude);
+<<<<<<< HEAD
     }
   }
   var lekeplassListe = [];
@@ -474,4 +514,23 @@ function lagListeMedLekeplasser(toalettNavn) {
         lekeplassListe.push(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
             jsonData2.entries[j].longitude));
   }
+=======
+      for(var j = 0; j < jsonData2.entries.length; j++) {
+        // Oppretter lekeplass-objekter med navn og distanse
+        lekeplasser[j] = {
+        navn: jsonData2.entries[j].navn,
+        distanse: kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
+            jsonData2.entries[j].longitude)
+      };
+      lekeplasser = sorter_lekeplasser(lekeplasser);
+    }
+  }
+}
+
+// Får en liste med 5 lekeplasser som er sotert med hensyn på distanse
+var lekeplasserhtml = lekeplasser.slice(0,5).map(function (element){
+  return '<li>' + lengdeTekst(element.distanse) + " " + element.navn + '</li>';
+  }).join(' ');
+  document.getElementById("lekeplasser").innerHTML = lekeplasserhtml;
+>>>>>>> da088f731bc4e253e0a4fdca8b664fd137e81697
 }

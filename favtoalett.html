@@ -3,47 +3,48 @@
   <head>
     <title>favoritt toalett</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/favorittstyle.css">
     <script type ="text/javascript" src="js/object.js"></script>
-
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=New+Rocker" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE">
     </script>
   </head>
   <body onload = "get_data('https://hotell.difi.no/api/json/bergen/dokart?')">
+  <div class="flexkasse">
   <nav>
     <a href="index.html">Forside</a>
     <a href="Toaletter.html">Toaletter</a>
-    <a href="informasjon.html">Utesteder</a>
     <a href ="lekeplass.html">Lekeplasser</a>
     <a href ="favtoalett.html">Ditt favoritt toalett</a>
     <a href ="ubestemtåpendata.html"> Åpen data ting</a>
-    <a href="advanced_search.html">Avansert Søk</a>
     <form class="newsearch" method="get" action="Toaletter.html">
       <input type="text" id="toalett" name="toalett" size="21" maxlength="100" placeholder="Search...">
       <input type="submit" value="Search" class="button">
     </form>
 </nav>
-<div class="flexkasse">
 <h1>Her kan du velge ditt favoritt toalett!</h1>
     <p>Velg favoritt toalettet ditt under og finn ut hvor de nærmeste lekeplassene er!</p>
     <button id  = "knapp" onclick="velgFavorittToalett()">Velg her!</button>
+    <script>
+    function myfunction(){
+      NLekeplasser();
+          console.log("heiiii");
+          document.getElementById("knapp").removeEventListener("click", myfunction);
+    }
+    document.getElementById("knapp").addEventListener("click", myfunction);
+    </script>
     <div id = "drop"></div>
+    <ol id = "lekeplasser"></ol>
     <ol id = "liste">
-  <!--    <select id="comboA" onchange="getTest(this)">
-<option value="">Select combo</option>
-<option value="Value1">Text1</option>
-<option value="Value2">Text2</option>
-<option value="Value3">Text3</option>
-</select>-->
     </ol>
     <div id = "map"></div>
       </div>
     <footer>
       <p>
-      Nettside om de 5 kuleste utestedene i Bergen
-      &#169; Group ...
+      Nettside om toaletter og lekeplasser i Bergen
+      &#169; Group 6969
       </p>
     </footer>
 </body>
