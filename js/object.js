@@ -431,6 +431,7 @@ function find_common(arr){
 }
 buttonPushed = true;
 }
+
 // Kalkulerer grader til radianer
 function tilRadianer(grader) {
   var resultat = grader * Math.PI/180;
@@ -458,12 +459,11 @@ function kalkulerDistanse(lat1, long1, lat2, long2) {
   return d;
 }
 
-
-
 function NLekeplasser() {
   get_data("https://hotell.difi.no/api/json/bergen/lekeplasser?");
 }
 
+// Funksjon som sorterer lekeplasser med hensyn på distanse
 function sorter_lekeplasser(lekeplasser) {
    lekeplasser.sort(function(x, y) {
    return (x.distanse - y.distanse)
@@ -471,14 +471,16 @@ function sorter_lekeplasser(lekeplasser) {
    return lekeplasser;
 }
 
+// Funksjon som får inn en lengde i km og returnerer en avrundet
+// verdi i meter om lengden < 1, eller km om lengden er >= 1
 function lengdeTekst(km) {
   if (km < 1) {
     return Math.round(km*1000) + " meter";
-  } else return Math.round(km*100)/100 + " km"
+  } else return Math.round(km*100)/100 + " km";
 }
 
 // Funksjon som tar inn navnet på et toalett og finner de
-// 5 nærmeste lekeplassene i en sortert liste.
+// nærmeste lekeplassene i en sortert liste.
 // Returnerer listen
 function lagListeMedLekeplasser(toalettNavn) {
   console.log(toalettNavn);
@@ -494,7 +496,8 @@ function lagListeMedLekeplasser(toalettNavn) {
       toalettLat = parseFloat(jsonData.entries[i].latitude);
       toalettLong = parseFloat(jsonData.entries[i].longitude);
       for(var j = 0; j < jsonData2.entries.length; j++) {
-      lekeplasser[j] = {
+        // Oppretter lekeplass-objekter med navn og distanse
+        lekeplasser[j] = {
         navn: jsonData2.entries[j].navn,
         distanse: kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
             jsonData2.entries[j].longitude)
@@ -503,6 +506,8 @@ function lagListeMedLekeplasser(toalettNavn) {
     }
   }
 }
+
+// Får en liste med 5 lekeplasser som er sotert med hensyn på distanse
 var lekeplasserhtml = lekeplasser.slice(0,5).map(function (element){
   return '<li>' + lengdeTekst(element.distanse) + " " + element.navn + '</li>';
   }).join(' ');
