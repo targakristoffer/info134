@@ -1,17 +1,13 @@
 body{
-background: #232526;
-background: -webkit-linear-gradient(to left, #414345, #232526);
-background: linear-gradient(to left, #414345, #232526);
+background: black;
   margin: 0;
   margin-top:10px;
   padding: 70px 0px 0px 0px;
   height: 100%;
-  font-family: 'New Rocker', cursive;
+  font-family: "Times New Roman", Times, serif;
 }
 
-#mySelect{
-}
-p{
+p,h1,h2,h3{
   color: white;
 }
 ol{
@@ -20,10 +16,6 @@ ol{
 
 label{
   color: white;
-}
-
-h1,h2,h3{
-  color:white;
 }
 
 a{
@@ -35,8 +27,7 @@ a:hover{
 }
 
 nav{
-	font-family: 'New Rocker', cursive;
-	background-color: rgba(135,135,135,0.9);
+	background-color: gray;
 	position: fixed;
 	top: 0px;
 	width: 100vw;
@@ -47,6 +38,7 @@ nav{
 }
 
 nav a{
+  margin-left: 10px;
   margin-right: 50px;
 }
 select{
@@ -60,17 +52,6 @@ position: absolute;
 	bottom: -1;
 	left: 0;
 	text-align: center;
-}
-
-#fotballpuben, #heidis, #lille, #vaskeriet, #bryggen{
-    margin: 0 auto;
-    margin-right: auto;
-    margin-bottom: 0px;
-    margin-left: auto;
-    padding-top: 0px;
-    padding-right: 20px;
-    padding-bottom: 0px;
-    padding-left: 20px;
 }
 
 #map{
@@ -88,14 +69,6 @@ position: absolute;
 .pic{
   width:200px;
   height:auto;
-}
-
-.kasse{
-  display: flex;
- flex: wrap;
-  justify-content: center;
-  align-items: center;
-  padding-top: 50px;
 }
 
 .flexkasse{
@@ -116,9 +89,6 @@ position: absolute;
   }
   nav a{
     margin-right:10px;
-  }
-  .kasse{
-    display: block;
   }
   #map{
       height: 250px;

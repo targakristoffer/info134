@@ -416,7 +416,7 @@ function find_common(arr){
     z.setAttribute("id","test");
     z.setAttribute("value", "Toaletter");
     if(i == 0){
-     t = document.createTextNode("velg fav");
+     t = document.createTextNode("Tilgjengelige toaletter");
     }
     else
      t = document.createTextNode(jsonData.entries[i-1].plassering);

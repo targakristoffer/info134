@@ -12,21 +12,19 @@
     <meta charset="utf-8">
   </head>
   <body onload = "get_data('https://hotell.difi.no/api/json/bergen/dokart?')">
+  <div class="flexkasse">
     <nav>
       <a href="index.html">Forside</a>
       <a href="Toaletter.html">Toaletter</a>
-      <a href="informasjon.html">Utesteder</a>
       <a href ="lekeplass.html">Lekeplasser</a>
       <a href ="favtoalett.html">Ditt favoritt toalett</a>
       <a href ="ubestemtåpendata.html"> Åpen data ting</a>
-      <a href="advanced_search.html">Avansert Søk</a>
     <form class="newsearch" method="get" action="Toaletter.html">
       <input type="text" id="toalett" name="toalett" size="21" maxlength="100" placeholder="Search...">
       <input type="submit" value="Search" class="button">
     </form>
 </nav>
         <h1>Kart og søk på toaletter i Bergen</h1>
-        <div class="flexkasse">
           <form id="search" action="Toaletter.html" method="get">
       <h2>Her blir det mulig å søke etter toaletter basert på valgene under</h2>
     <fieldset>
