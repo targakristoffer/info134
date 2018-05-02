@@ -9,8 +9,8 @@ function get_data(url){
   xhr = new XMLHttpRequest();
   xhr.open("GET",url);
   xhr.onreadystatechange = function(){
-      if(xhr.readyState === 4 && xhr.status === 200){
-        if(isJson(xhr.response)){
+    if(xhr.readyState === 4 && xhr.status === 200){
+      if(isJson(xhr.response)){
         parse_data(xhr.response);
       }
       else{
@@ -33,11 +33,11 @@ function isJson(str) {
 /* Gjør om en string til et json objekt.*/
 function parse_data(json){
   if(isEmpty(jsonData)){
-  jsonData = JSON.parse(json);
-  check_method();
-}
+    jsonData = JSON.parse(json);
+    check_method();
+  }
   else {
-  jsonData2 = JSON.parse(json);
+    jsonData2 = JSON.parse(json);
   }
 }
 
@@ -47,44 +47,44 @@ function check_method(){
   var regex = new RegExp( "toalett", 'g' );
   var regex2 = new RegExp( "advanced=Search", 'g');
   if (uri.substring(uri.indexOf("?")+1).match(regex)){
-      return match_search(2);
-    }
+    return match_search(2);
+  }
   if (uri.substring(uri.indexOf("?")+1).match(regex2)){
-      return match_search(1);
-    }
-   return full_load();
+    return match_search(1);
+  }
+  return full_load();
 
 }
 function full_load(){
-var pos1 = {lat:60.395343, lng:5.325745};
-var map = new google.maps.Map(document.getElementById('map'), {
-  zoom: 14,
-  center:pos1
-});
+  var pos1 = {lat:60.395343, lng:5.325745};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 14,
+    center:pos1
+  });
 
-for(var i =0; i < jsonData.entries.length; i++){
-  var teller = i + 1;
-  var a =  jsonData.entries[i].plassering +" Adresse: " + jsonData.entries[i].adresse;
-  var b =  jsonData.entries[i].navn;
-  var pos = {lat:parseFloat(jsonData.entries[i].latitude), lng:parseFloat(jsonData.entries[i].longitude)};
-  var ol = document.getElementById("liste");
-  var li = document.createElement("li");
+  for(var i =0; i < jsonData.entries.length; i++){
+    var teller = i + 1;
+    var a =  jsonData.entries[i].plassering +" Adresse: " + jsonData.entries[i].adresse;
+    var b =  jsonData.entries[i].navn;
+    var pos = {lat:parseFloat(jsonData.entries[i].latitude), lng:parseFloat(jsonData.entries[i].longitude)};
+    var ol = document.getElementById("liste");
+    var li = document.createElement("li");
 
-  if (jsonData.entries[i].plassering != undefined) {
-    li.innerHTML = a;
-    ol.appendChild(li);
+    if (jsonData.entries[i].plassering != undefined) {
+      li.innerHTML = a;
+      ol.appendChild(li);
+    }
+
+    else {li.innerHTML = b;
+      ol.appendChild(li);
+    }
+    var marker = new google.maps.Marker({
+      animation: google.maps.Animation.DROP,
+      position: pos,
+      map: map,
+      label: teller.toString()
+    });
   }
-
-  else {li.innerHTML = b;
-    ol.appendChild(li);
-  }
-  var marker = new google.maps.Marker({
-     animation: google.maps.Animation.DROP,
-     position: pos,
-     map: map,
-     label: teller.toString()
-   });
-}
 }
 function fill_map(søkeobj){
   var obj = søkeobj;
@@ -95,18 +95,16 @@ function fill_map(søkeobj){
     center:pos1
   });
 
-  for(var i =0; i < jsonData.entries.length; i++){
-    var a = jsonData.entries[i].plassering;
-    var pos = {lat: parseFloat(jsonData.entries[i].latitude), lng: parseFloat(jsonData.entries[i].longitude)};
-
+  for(var i =0; i < obj.length; i++){
+    var a = obj[i].plassering;
     var ol = document.getElementById("liste");
     var li = document.createElement("li");
+    var pos = {lat: parseFloat(obj[i].latitude), lng: parseFloat(obj[i].longitude)};
 
-
-    for(var j= 0; j < obj.length; j++){
-    if(jsonData.entries[i].plassering == obj[j].plassering){
+    if(a != undefined){
       li.innerHTML = a;
       ol.appendChild(li);
+    }
     var marker = new google.maps.Marker({
       animation: google.maps.Animation.DROP,
       position: pos,
@@ -115,8 +113,6 @@ function fill_map(søkeobj){
     });
 
     teller = teller + 1;
-  }
-  }
   }
 }
 
@@ -127,38 +123,44 @@ function fast_search(){
   var k = 0;
 
   if (uri.indexOf("=") < 0)
-      return result;
+  return result;
   query_string = uri.substring(uri.indexOf("=")+1);
   if (query_string.indexOf("#") >= 0)
-      query_string = query_string.substring(0, query_string.indexOf("#"));
+  query_string = query_string.substring(0, query_string.indexOf("#"));
   for(var i = 0; i < query_string.length; i++){
-      if (query_string.indexOf("+") < 0){
-        result[k] = query_string;
-        break;
+    if (query_string.indexOf("+") < 0){
+      result[k] = query_string;
+      break;
     }
 
     if(query_string.match(/[a-zæøå]+[:]/)){
       var match = /[a-zæøå]+[:]/.exec(query_string);
       if(!match.index == 0){
-      result[k] =  query_string.substring(0,match.index-1);
-      query_string = query_string.substring(match.index)
-    }
-    else {
-      if(query_string.match(/plassering/)){
-        var match2 = /[+][a-zæøå]+[:]/.exec(query_string);
-        result[k] = query_string.substring(0,match2.index);
-        query_string = query_string.substring(match2.index+1);
+        result[k] =  query_string.substring(0,match.index-1);
+        query_string = query_string.substring(match.index)
       }
-      else{
-        result[k] = query_string.substring(0,query_string.indexOf("+"));
-        query_string = query_string.substring(query_string.indexOf("+")+1);
+      else {
+        if(query_string.match(/plassering/)){
+          var match2 = /[+][a-zæøå]+[:]/.exec(query_string);
+          if(match2 != null){
+            result[k] = query_string.substring(0,match2.index);
+            query_string = query_string.substring(match2.index+1);
+          }
+          else{
+            result[k] = query_string;
+            query_string = "";
+          }
+        }
+        else{
+          result[k] = query_string.substring(0,query_string.indexOf("+"));
+          query_string = query_string.substring(query_string.indexOf("+")+1);
+        }
       }
-    }
     }
     else{
 
-    result[k] = query_string;
-    query_string="";
+      result[k] = query_string;
+      query_string="";
 
     }
     k = k +1;
@@ -177,22 +179,22 @@ function fast_search(){
       søk.place = result[i].substring(result[i].indexOf(":")+1);
     }
     if(!result[i].match(/(\w+[:])/)){
-        søk.adresse = result[i].replace(/[+]/g," ");
+      søk.adresse = result[i].replace(/[+]/g," ");
     }
     if(result[i].match(/(herre:)/)){
       if(result[i].substring(result[i].indexOf(":")+1) == "1"){
         søk.herre = 1;
       }
-  }
-  if(result[i].match(/(dame:)/)){
-    if(result[i].substring(result[i].indexOf(":")+1) == "1"){
-      søk.dame = 1;
     }
-  }
+    if(result[i].match(/(dame:)/)){
+      if(result[i].substring(result[i].indexOf(":")+1) == "1"){
+        søk.dame = 1;
+      }
+    }
     if(result[i].match(/(åpen:)/)){
       if(result[i].substring(result[i].indexOf(":")+1) == "nå"){
-      søk.åpen_nå = new Date().toLocaleTimeString('en-US', {hour12: false, hour:"numeric", minute: "numeric"}).replace(":",".");
-    }
+        søk.åpen_nå = new Date().toLocaleTimeString('en-US', {hour12: false, hour:"numeric", minute: "numeric"}).replace(":",".");
+      }
       if(result[i].substring(result[i].indexOf(":")+1).match(/^(|0[0-9]|1[0-9]|2[0-3])(:|.)[0-5][0-9]$/)){ //matcher etter klokkeslett i format HH:MM (enten med . eller :).
         søk.åpen = result[i].substring(result[i].indexOf(":")+1).replace(":",".");
       }
@@ -204,7 +206,12 @@ function fast_search(){
       søk.stellerom = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
     if(result[i].match(/(pris)/)){
-      søk.pris = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
+      if(result[i].substring(result[i].indexOf(":")+1) == "gratis"){
+        søk.maks_pris = 0;
+      }
+      else {
+        søk.maks_pris = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
+      }
     }
     if(result[i].match(/(rullestol)/)){
       søk.rullestol = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
@@ -220,91 +227,99 @@ function advanced(){
   var query_string="";
   var k = 0;
   if (uri.indexOf("=") < 0)
-      return result;
+  return result;
   query_string = uri.substring(uri.indexOf("?")+1);
   if (query_string.indexOf("#") >= 0)
-      query_string = query_string.substring(0, query_string.indexOf("#"));
+  query_string = query_string.substring(0, query_string.indexOf("#"));
   var l = query_string.length;
   for(var i = 0; i < l; i++){
-      if (query_string.indexOf("&") < 0){
-        result[k] = query_string;
-        break;
+    if (query_string.indexOf("&") < 0){
+      result[k] = query_string;
+      break;
     }
     i = query_string.indexOf("&");
     result[k] = query_string.substring(0,i);
     query_string = query_string.substring(i+1,l);
-
     k = k +1;
-}
-
-var søk = {};
-for(var i = 0; i < result.length;i++){
-  if(result[i].match(/(plassering)/)){
-      if(result[i].indexOf("=")+1 > 0)
-    søk.plassering = result[i].substring(result[i].indexOf("=")+1).toUpperCase();
   }
 
-  if(result[i].match(/(kjønnHerre)/)){
-    if(result[i].substring(result[i].indexOf("=")+1) == "on"){
-      søk.herre = 1;
+  var søk = {};
+  for(var i = 0; i < result.length;i++){
+    if(result[i].match(/(plassering)/)){
+      if(result[i].substring(result[i].indexOf("=")+1) != "")
+      søk.plassering = result[i].substring(result[i].indexOf("=")+1).replace(/[+]/g," ");
+    }
+
+    if(result[i].match(/(kjønnHerre)/)){
+      if(result[i].substring(result[i].indexOf("=")+1) == "on"){
+        søk.herre = 1;
+      }
+    }
+    if(result[i].match(/(kjønnDame)/)){
+      if(result[i].substring(result[i].indexOf("=")+1) == "on"){
+        søk.dame=1;
+      }
+    }
+    if(result[i].match(/(tid_nå)/)){
+      if(result[i].substring(result[i].indexOf("=")+1) == "on"){
+        søk.åpen_nå = new Date().toLocaleTimeString('en-US', {hour12: false, hour:"numeric", minute: "numeric"}).replace(":",".");
+      }
+    }
+    if(result[i].match(/(klokkeslett)/)){
+      if(result[i].substring(result[i].indexOf("=")+1) != "")
+      søk.åpen = result[i].substring(result[i].indexOf("=")+1);
+    }
+    if(result[i].match(/(pissoir_only)/)){
+      if(result[i].substring(result[i].indexOf("=")+1) == "on"){
+        søk.pissoir_only = 1;
+      }
+    }
+    if(result[i].match(/(stellerom)/)){
+      if(result[i].substring(result[i].indexOf("=")+1) == "on"){
+        søk.stellerom = 1;
+      }
+    }
+    if(result[i].match(/(maksPris)/)){
+      if(result[i].substring(result[i].indexOf("=")+1) != "")
+      søk.maks_pris = result[i].substring(result[i].indexOf("=")+1);
+    }
+    if(result[i].match(/(gratis)/)){
+      if(result[i].substring(result[i].indexOf("=")+1) == "on"){
+        søk.maks_pris = 0;
+      }
+    }
+
+    if(result[i].match(/(rullestol)/)){
+      if(result[i].substring(result[i].indexOf("=")+1) == "on"){
+        søk.rullestol = 1;
+      }
     }
   }
-  if(result[i].match(/(kjønnDame)/)){
-  if(result[i].substring(result[i].indexOf("=")+1) == "on"){
-    søk.dame=1;
-  }
-}
-  if(result[i].match(/(tid)/)){
-    if(result[i].indexOf("=")+1 > 0)
-    søk.tid = result[i].substring(result[i].indexOf("=")+1);
-  }
-  if(result[i].match(/(pissoir_only)/)){
-      if(result[i].substring(result[i].indexOf("=")+1) == "on"){
-    søk.pissoir_only = 1;
-  }
-}
-  if(result[i].match(/(stellerom)/)){
-      if(result[i].substring(result[i].indexOf("=")+1) == "on"){
-    søk.stellerom = 1;
-  }
-}
-  if(result[i].match(/(pris)/)){
-    søk.pris = result[i].substring(result[i].indexOf("=")+1);
-  }
-
-  if(result[i].match(/(rullestol)/)){
-      if(result[i].substring(result[i].indexOf("=")+1) == "on"){
-    søk.rullestol = 1;
-  }
-  }
-}
-return søk;
+  return søk;
 }
 
 function isEmpty(obj) {
-    for(var prop in obj) {
-        if(obj.hasOwnProperty(prop)){
-            return false;
-          }
-        }
+  for(var prop in obj) {
+    if(obj.hasOwnProperty(prop)){
+      return false;
+    }
+  }
   return true;
 }
 
 function match_search(search_method){
-var k = {};
+  var k = {};
   if(search_method == 1){
-   k = advanced();
- }
+    k = advanced();
+  }
   if(search_method == 2){
-     k = fast_search();
-   }
-if(isEmpty(k)){
-  return full_load();
-}
+    k = fast_search();
+  }
+  if(isEmpty(k)){
+    return full_load();
+  }
   var result = [];
   var arr=[];
-
-
 
   for(var i = 0; i < jsonData.entries.length; i++){
     var keys = Object.keys(k);
@@ -316,12 +331,14 @@ if(isEmpty(k)){
           teller++;
         }
       }
-      if(jsonData.entries[i].hasOwnProperty(keys[j])){
-          if(keys[j] == "pris" && (parseInt(k[keys[j]]) > parseInt(jsonData.entries[i][keys[j]]) || jsonData.entries[i][keys[j]] == "NULL" )){
+      if(keys[j] == "maks_pris"){ //Antar at NULL er det samme som gratis.
+        if(parseInt(k[keys[j]]) >= parseInt(jsonData.entries[i].pris) || jsonData.entries[i].pris == "NULL"){
           teller++;
         }
-        var regex = new RegExp( k[keys[j]].toUpperCase(), 'g' );
-        if(jsonData.entries[i][keys[j]].toUpperCase().match(regex)){
+      }
+      if(jsonData.entries[i].hasOwnProperty(keys[j])){
+        var regex = new RegExp( k[keys[j]], 'i' );
+        if(jsonData.entries[i][keys[j]].match(regex)){
           teller++;
         }
       }
@@ -333,33 +350,33 @@ if(isEmpty(k)){
   fill_map(arr);
 }
 
-  function check_open(json, search_time, day){
-    if(json.tid_hverdag == "ALL" || json.tid_lordag == "ALL" || json.tid_sondag == "ALL"){
-      return true;
-    }
-    if(6>day && day>0){ //hverdag
-     var open = json.tid_hverdag.substring(0,json.tid_hverdag.indexOf(" "));
-      var close = json.tid_hverdag.substring(json.tid_hverdag.lastIndexOf(" ")+1);
-      if( open <= search_time && search_time <= close){
-      return true;
-      }
-    }
-    if(day === 6){//lørdag
-      var open = json.tid_lordag.substring(0,json.tid_lordag.indexOf(" "));
-      var close = json.tid_lordag.substring(json.tid_lordag.lastIndexOf(" ")+1);
-      if( open <= search_time && search_time <= close){
-       return true;
-      }
-    }
-    if(day === 0){//Søndag
-      var open = json.tid_sondag.substring(0,json.tid_sondag.indexOf(" "));
-      var close = json.tid_sondag.substring(json.tid_sondag.lastIndexOf(" ")+1);
-      if( open <= search_time && search_time <= close){
-       return true;
-      }
-    }
-    return false;
+function check_open(json, search_time, day){
+  if(json.tid_hverdag == "ALL" || json.tid_lordag == "ALL" || json.tid_sondag == "ALL"){
+    return true;
   }
+  if(6>day && day>0){ //hverdag
+    var open = json.tid_hverdag.substring(0,json.tid_hverdag.indexOf(" "));
+    var close = json.tid_hverdag.substring(json.tid_hverdag.lastIndexOf(" ")+1);
+    if( open <= search_time && search_time <= close){
+      return true;
+    }
+  }
+  if(day === 6){//lørdag
+    var open = json.tid_lordag.substring(0,json.tid_lordag.indexOf(" "));
+    var close = json.tid_lordag.substring(json.tid_lordag.lastIndexOf(" ")+1);
+    if( open <= search_time && search_time <= close){
+      return true;
+    }
+  }
+  if(day === 0){//Søndag
+    var open = json.tid_sondag.substring(0,json.tid_sondag.indexOf(" "));
+    var close = json.tid_sondag.substring(json.tid_sondag.lastIndexOf(" ")+1);
+    if( open <= search_time && search_time <= close){
+      return true;
+    }
+  }
+  return false;
+}
 
 function find_common(arr){
   var result = [];
@@ -382,7 +399,7 @@ function find_common(arr){
   for(var i = 0; i < l; i++){
     for(var j = i+1; j < l; j++){
       if(result[i] == result[j]){
-       new_result = find_common(result);
+        new_result = find_common(result);
       }
     }
   }
@@ -395,10 +412,10 @@ function find_common(arr){
   return new_result;
 }
 
-  var buttonPushed = false;
+var buttonPushed = false;
 
-  function velgFavorittToalett() {
-    if(!buttonPushed){
+function velgFavorittToalett() {
+  if(!buttonPushed){
     var t ="";
     var x = document.createElement("SELECT");
     x.setAttribute("id", "mySelect");
@@ -407,24 +424,24 @@ function find_common(arr){
       NLekeplasser();
     });
     for(var i = 0;i<jsonData.entries.length+1 ;i++){
-    var z = document.createElement("option");
-    z.setAttribute("id","test");
-    z.setAttribute("value", "Toaletter");
-    if(i == 0){
-     t = document.createTextNode("Tilgjengelige toaletter");
+      var z = document.createElement("option");
+      z.setAttribute("id","test");
+      z.setAttribute("value", "Toaletter");
+      if(i == 0){
+        t = document.createTextNode("Tilgjengelige toaletter");
+      }
+      else
+      t = document.createTextNode(jsonData.entries[i-1].plassering);
+      z.appendChild(t);
+      document.getElementById("mySelect").appendChild(z);
     }
-    else
-     t = document.createTextNode(jsonData.entries[i-1].plassering);
-    z.appendChild(t);
-    document.getElementById("mySelect").appendChild(z);
+    document.getElementById("mySelect").addEventListener("change", function(){
+      var valg = document.getElementById("mySelect");
+      var sendesVidere = valg.options[valg.selectedIndex].text;
+      lagListeMedLekeplasser(sendesVidere);
+    });
   }
-  document.getElementById("mySelect").addEventListener("change", function(){
-  var valg = document.getElementById("mySelect");
-  var sendesVidere = valg.options[valg.selectedIndex].text;
-  lagListeMedLekeplasser(sendesVidere);
-});
-}
-buttonPushed = true;
+  buttonPushed = true;
 }
 
 // Kalkulerer grader til radianer
@@ -460,10 +477,10 @@ function NLekeplasser() {
 
 // Funksjon som sorterer lekeplasser med hensyn på distanse
 function sorter_lekeplasser(lekeplasser) {
-   lekeplasser.sort(function(x, y) {
-   return (x.distanse - y.distanse)
-});
-   return lekeplasser;
+  lekeplasser.sort(function(x, y) {
+    return (x.distanse - y.distanse)
+  });
+  return lekeplasser;
 }
 
 // Funksjon som får inn en lengde i km og returnerer en avrundet
@@ -478,7 +495,6 @@ function lengdeTekst(km) {
 // nærmeste lekeplassene i en sortert liste.
 // Returnerer listen
 function lagListeMedLekeplasser(toalettNavn) {
-  console.log(toalettNavn);
   var lekeplasser = [];
 
   for(var i =0; i < jsonData.entries.length; i++){
@@ -493,18 +509,20 @@ function lagListeMedLekeplasser(toalettNavn) {
       for(var j = 0; j < jsonData2.entries.length; j++) {
         // Oppretter lekeplass-objekter med navn og distanse
         lekeplasser[j] = {
-        navn: jsonData2.entries[j].navn,
-        distanse: kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
+          navn: jsonData2.entries[j].navn,
+          longitude: jsonData2.entries[j].longitude,
+          latitude: jsonData2.entries[j].latitude,
+          distanse: kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
             jsonData2.entries[j].longitude)
-      };
-      lekeplasser = sorter_lekeplasser(lekeplasser);
+          };
+          lekeplasser = sorter_lekeplasser(lekeplasser);
+        }
+      }
     }
+    // Får en liste med 5 lekeplasser som er sotert med hensyn på distanse
+    var lekeplasserhtml = lekeplasser.slice(0,5).map(function (element){
+      return '<li>' + lengdeTekst(element.distanse) + " " + element.navn + '</li>';
+    }).join(' ');
+    document.getElementById("lekeplasser").innerHTML = lekeplasserhtml;
+    fill_map(lekeplasser.slice(0,5));
   }
-}
-
-// Får en liste med 5 lekeplasser som er sotert med hensyn på distanse
-var lekeplasserhtml = lekeplasser.slice(0,5).map(function (element){
-  return '<li>' + lengdeTekst(element.distanse) + " " + element.navn + '</li>';
-  }).join(' ');
-  document.getElementById("lekeplasser").innerHTML = lekeplasserhtml;
-}
