@@ -4,10 +4,8 @@ har mulighet til å søke etter adresse, kjønn, pris osv. */
 
 var jsonData ={};
 var jsonData2 = {};
-console.log(isEmpty(jsonData));
 
 function get_data(url){
-  console.log(url);
   xhr = new XMLHttpRequest();
   xhr.open("GET",url);
   xhr.onreadystatechange = function(){
@@ -37,7 +35,6 @@ function parse_data(json){
   if(isEmpty(jsonData))
   jsonData = JSON.parse(json);
   else {
-    console.log("funka");
   jsonData2 = JSON.parse(json);
   }
   check_method();
@@ -133,17 +130,37 @@ function fast_search(){
   query_string = uri.substring(uri.indexOf("=")+1);
   if (query_string.indexOf("#") >= 0)
       query_string = query_string.substring(0, query_string.indexOf("#"));
-  var l = query_string.length;
-  for(var i = 0; i < l; i++){
+  for(var i = 0; i < query_string.length; i++){
       if (query_string.indexOf("+") < 0){
         result[k] = query_string;
         break;
     }
 
-    i = query_string.indexOf("+");
-    result[k] = query_string.substring(0,i);
-    query_string = query_string.substring(i+1,l);
+    if(query_string.match(/[a-zæøå]+[:]/)){
 
+      var match = /[a-zæøå]+[:]/.exec(query_string);
+      if(!match.index == 0){
+      result[k] =  query_string.substring(0,match.index-1);
+      query_string = query_string.substring(match.index)
+    }
+    else {
+      if(query_string.match(/plassering/)){
+        var match2 = /[+][a-zæøå]+[:]/.exec(query_string);
+        result[k] = query_string.substring(0,match2.index);
+        query_string = query_string.substring(match2.index+1);
+      }
+      else{
+        result[k] = query_string.substring(0,query_string.indexOf("+"));
+        query_string = query_string.substring(query_string.indexOf("+")+1);
+      }
+    }
+    }
+    else{
+
+    result[k] = query_string;
+    query_string="";
+
+    }
     k = k +1;
 
   }
@@ -152,33 +169,33 @@ function fast_search(){
   var søk ={};
 
   for(var i = 0; i < result.length;i++){
+
     if(result[i].match(/(plassering)/)){
-      søk.plassering = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
+      søk.plassering = result[i].substring(result[i].indexOf(":")+1).replace(/[+]/g," ");
+    }
+    if(result[i].match(/(place)/)){
+      søk.place = result[i].substring(result[i].indexOf(":")+1);
     }
     if(!result[i].match(/(\w+[:])/)){
-      søk.adresse = result[i].substring(result[i].indexOf(":")+1);
+        søk.adresse = result[i].replace(/[+]/g," ");
     }
     if(result[i].match(/(herre:)/)){
-      if(result[i].substring(result[i].indexOf(":")+1).toUpperCase() == "1"){
+      if(result[i].substring(result[i].indexOf(":")+1) == "1"){
         søk.herre = 1;
-      }
-      else {
-        søk.herre = "NULL";
       }
   }
   if(result[i].match(/(dame:)/)){
-    if(result[i].substring(result[i].indexOf(":")+1).toUpperCase() == "1"){
+    if(result[i].substring(result[i].indexOf(":")+1) == "1"){
       søk.dame = 1;
-    }
-    else {
-      søk.dame = "NULL";
     }
   }
     if(result[i].match(/(åpen:)/)){
       if(result[i].substring(result[i].indexOf(":")+1) == "nå"){
       søk.åpen_nå = new Date().toLocaleTimeString('en-US', {hour12: false, hour:"numeric", minute: "numeric"}).replace(":",".");
-      console.log(søk.åpen_nå);
     }
+      if(result[i].substring(result[i].indexOf(":")+1).match(/^(|0[0-9]|1[0-9]|2[0-3])(:|.)[0-5][0-9]$/)){ //matcher etter klokkeslett i format HH:MM (enten med . eller :).
+        søk.åpen = result[i].substring(result[i].indexOf(":")+1).replace(":",".");
+      }
     }
     if(result[i].match(/(pissoir_only)/)){
       søk.pissoir_only = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
@@ -294,19 +311,18 @@ if(isEmpty(k)){
     var keys = Object.keys(k);
     var teller = 0;
     for(var j = 0; j < keys.length; j++){
-    /*  console.log("Keys[j]  " + keys[j]);
-      console.log("k[keys[j]]  "+k[keys[j]]);
-      console.log("keys " + keys);*/
-      if(keys[j] == "åpen_nå"){
-        console.log("lengde " + keys.length);
+      if(keys[j] == "åpen_nå" || keys[j] == "åpen"){
         var date = new Date();
         if(check_open(jsonData.entries[i], k[keys[j]], date.getDay())){
-          console.log("Var true");
           teller++;
         }
       }
       if(jsonData.entries[i].hasOwnProperty(keys[j])){
-        if(jsonData.entries[i][keys[j]] == k[keys[j]]){
+          if(keys[j] == "pris" && (parseInt(k[keys[j]]) > parseInt(jsonData.entries[i][keys[j]]) || jsonData.entries[i][keys[j]] == "NULL" )){
+          teller++;
+        }
+        var regex = new RegExp( k[keys[j]].toUpperCase(), 'g' );
+        if(jsonData.entries[i][keys[j]].toUpperCase().match(regex)){
           teller++;
         }
       }
@@ -315,46 +331,31 @@ if(isEmpty(k)){
       }
     }
   }
-  console.log(arr);
   fill_map(arr);
-
-/*
-    for(var x in k){
-      for(var i in jsonData.entries){
-        var regex = new RegExp( k[x], 'g' );
-        if(jsonData.entries[i][x].match(regex)){
-        arr[teller] = jsonData.entries[i].plassering;
-        teller = teller +1;
-      }
-      }
-    }
-    result = find_common(arr);
-    fill_map(result);*/
-  }
+}
 
   function check_open(json, search_time, day){
     if(json.tid_hverdag == "ALL" || json.tid_lordag == "ALL" || json.tid_sondag == "ALL"){
-      console.log(json.plassering +" "+json.tid_hverdag);
       return true;
     }
-    if(6>day>0){ //hverdag
+    if(6>day && day>0){ //hverdag
      var open = json.tid_hverdag.substring(0,json.tid_hverdag.indexOf(" "));
       var close = json.tid_hverdag.substring(json.tid_hverdag.lastIndexOf(" ")+1);
-      if( open <= search_time <= close){
+      if( open <= search_time && search_time <= close){
       return true;
       }
     }
     if(day === 6){//lørdag
       var open = json.tid_lordag.substring(0,json.tid_lordag.indexOf(" "));
       var close = json.tid_lordag.substring(json.tid_lordag.lastIndexOf(" ")+1);
-      if( open <= search_time <= close){
+      if( open <= search_time && search_time <= close){
        return true;
       }
     }
     if(day === 0){//Søndag
       var open = json.tid_sondag.substring(0,json.tid_sondag.indexOf(" "));
       var close = json.tid_sondag.substring(json.tid_sondag.lastIndexOf(" ")+1);
-      if( open <= search_time <= close){
+      if( open <= search_time && search_time <= close){
        return true;
       }
     }
@@ -364,13 +365,6 @@ if(isEmpty(k)){
 function find_common(arr){
   var result = [];
   var teller = 0;
-
-
-
-
-//Legge til en teller på en måte slik at koden sjekker om antall søkekriterier fra søkeobjektet matcher jsondataen.
-// Kan bruke søkeobjektet og legge inn en match i en ny array og sjekke lengden til den. Om lengden er lik lengden til søkeobjektet
-// så er stedet en match.
 
   for(var i = 0; i < arr.length; i++){
     for(var j = i+1; j < arr.length; j++){
@@ -408,7 +402,6 @@ function find_common(arr){
     document.getElementById("drop").appendChild(x);
     document.getElementById("knapp").addEventListener("click", function(){
       NLekeplasser();
-      console.log("heiiii");
     });
     for(var i = 0;i<jsonData.entries.length+1 ;i++){
     var z = document.createElement("option");
@@ -464,8 +457,6 @@ function NLekeplasser() {
   get_data("https://hotell.difi.no/api/json/bergen/lekeplasser?");
 }
 function lagListeMedLekeplasser(toalettNavn) {
-  console.log(jsonData);
-  console.log(toalettNavn);
   for(var i =0; i < 14; i++){
     var teller = i + 1;
     var toalettLat = 0;
@@ -475,23 +466,12 @@ function lagListeMedLekeplasser(toalettNavn) {
     if (a == toalettNavn) {
       toalettLat = parseFloat(jsonData.entries[i].latitude);
       toalettLong = parseFloat(jsonData.entries[i].longitude);
-      console.log("TEST1 " + a);
-      console.log("TEST2" + toalettLong + "  " + toalettLat);
     }
   }
-
-
-
   var lekeplassListe = [];
-
-  console.log(jsonData2);
-
   for(var j = 0; j < jsonData2.entries.length; j++) {
-    console.log(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
         jsonData2.entries[j].longitude));
         lekeplassListe.push(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
             jsonData2.entries[j].longitude));
   }
-  console.log(lekeplassListe);
-
 }
