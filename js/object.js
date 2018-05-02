@@ -476,7 +476,7 @@ function sorter_lekeplasser(lekeplasser) {
 function lengdeTekst(km) {
   if (km < 1) {
     return Math.round(km*1000) + " meter";
-  } else return Math.round(km*100)/100 + " km"
+  } else return Math.round(km*100)/100 + " km";
 }
 
 // Funksjon som tar inn navnet på et toalett og finner de
