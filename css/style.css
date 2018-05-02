@@ -1,5 +1,5 @@
 body{
-background: white;
+  background: white;
   margin: 0;
   margin-top:10px;
   padding: 70px 0px 0px 0px;
@@ -27,14 +27,14 @@ a:hover{
 }
 
 nav{
-	background-color: yellow;
-	position: fixed;
-	top: 0px;
-	width: 100vw;
-	list-style-type: none;
+  background-color: yellow;
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  list-style-type: none;
   padding-top: 20px;
-	padding-bottom:20px;
-	z-index:1;
+  padding-bottom:20px;
+  z-index:1;
 }
 
 nav a{
@@ -44,29 +44,26 @@ nav a{
 li{
   margin-top: 10px;
 }
-select{
-  position: absolute;
 
-}
 footer{
-position: absolute;
+  position: absolute;
   padding: 20px 0 20px;
-	right: 0;
-	bottom: -1;
-	left: 0;
-	text-align: center;
+  right: 0;
+  bottom: -1;
+  left: 0;
+  text-align: center;
 }
 
 #map{
-    height: 350px;
-    width: 70%;
-    }
+  height: 350px;
+  width: 70%;
+}
 .newsearch{
-    float: right;
-    padding: 10px 10px 10px 10px;
-    }
+  float: right;
+  padding: 10px 10px 10px 10px;
+}
 .button{
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .pic{
@@ -94,6 +91,6 @@ position: absolute;
     margin-right:10px;
   }
   #map{
-      height: 250px;
-      }
+    height: 250px;
+  }
 }

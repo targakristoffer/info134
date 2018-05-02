@@ -322,6 +322,7 @@ if(isEmpty(k)){
         }
         var regex = new RegExp( k[keys[j]].toUpperCase(), 'g' );
         if(jsonData.entries[i][keys[j]].toUpperCase().match(regex)){
+          console.log("sdf");
           teller++;
         }
       }
