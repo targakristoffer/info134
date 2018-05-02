@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>favoritt toalett</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/favorittstyle.css">
-    <script type ="text/javascript" src="js/object.js"></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE">
-    </script>
-  </head>
-  <body onload = "get_data('https://hotell.difi.no/api/json/bergen/dokart?')">
+<head>
+  <title>favoritt toalett</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/favorittstyle.css">
+  <script type ="text/javascript" src="js/object.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE">
+  </script>
+</head>
+<body onload = "get_data('https://hotell.difi.no/api/json/bergen/dokart?')">
   <div class="flexkasse">
-  <nav>
-    <a href="index.html">Forside</a>
-    <a href="Toaletter.html">Toaletter</a>
-    <a href ="lekeplass.html">Lekeplasser</a>
-    <a href ="favtoalett.html">Ditt favoritt toalett</a>
-    <a href ="ubestemtåpendata.html"> Åpen data ting</a>
-    <form class="newsearch" method="get" action="Toaletter.html">
-      <input type="text" id="toalett" name="toalett" size="21" maxlength="100" placeholder="Search...">
-      <input type="submit" value="Search" class="button">
-    </form>
-</nav>
-<h1>Her kan du velge ditt favoritt toalett!</h1>
+    <nav>
+      <a href="index.html">Forside</a>
+      <a href="Toaletter.html">Toaletter</a>
+      <a href ="lekeplass.html">Lekeplasser</a>
+      <a href ="favtoalett.html">Ditt favoritt toalett</a>
+      <a href ="ubestemtåpendata.html"> Åpen data ting</a>
+      <form class="newsearch" method="get" action="Toaletter.html">
+        <input type="text" id="toalett" name="toalett" size="21" maxlength="100" placeholder="Search...">
+        <input type="submit" value="Search" class="button">
+      </form>
+    </nav>
+    <h1>Her kan du velge ditt favoritt toalett!</h1>
     <p>Velg favoritt toalettet ditt under og finn ut hvor de nærmeste lekeplassene er!</p>
     <button id  = "knapp" onclick="velgFavorittToalett()">Velg her!</button>
     <script>
@@ -39,12 +39,12 @@
     <ol id = "liste">
     </ol>
     <div id = "map"></div>
-      </div>
-    <footer>
-      <p>
+  </div>
+  <footer>
+    <p>
       Nettside om toaletter og lekeplasser i Bergen
       &#169; Group 6969
-      </p>
-    </footer>
+    </p>
+  </footer>
 </body>
 </html>

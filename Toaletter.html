@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Toaletter</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-      <link href="https://fonts.googleapis.com/css?family=New+Rocker" rel="stylesheet">
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE">
-    </script>
-    <script type ="text/javascript" src="js/object.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body onload = "get_data('https://hotell.difi.no/api/json/bergen/dokart?')">
+<head>
+  <title>Toaletter</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=New+Rocker" rel="stylesheet">
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE">
+  </script>
+  <script type ="text/javascript" src="js/object.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body onload = "get_data('https://hotell.difi.no/api/json/bergen/dokart?')">
   <div class="flexkasse">
     <nav>
       <a href="index.html">Forside</a>
@@ -20,13 +20,13 @@
       <a href ="lekeplass.html">Lekeplasser</a>
       <a href ="favtoalett.html">Ditt favoritt toalett</a>
       <a href ="ubestemtåpendata.html"> Åpen data ting</a>
-    <form class="newsearch" method="get" action="Toaletter.html">
-      <input type="text" id="toalett" name="toalett" size="21" maxlength="100" placeholder="Search...">
-      <input type="submit" value="Search" class="button">
-    </form>
-</nav>
-        <h1>Kart og søk på toaletter i Bergen</h1>
-          <form id="search" action="Toaletter.html" method="get">
+      <form class="newsearch" method="get" action="Toaletter.html">
+        <input type="text" id="toalett" name="toalett" size="21" maxlength="100" placeholder="Search...">
+        <input type="submit" value="Search" class="button">
+      </form>
+    </nav>
+    <h1>Kart og søk på toaletter i Bergen</h1>
+    <form id="search" action="Toaletter.html" method="get">
       <h2>Her blir det mulig å søke etter toaletter basert på valgene under</h2>
     <fieldset>
       <div>
@@ -51,38 +51,38 @@
           <input id="stellerom" name="stellerom" type="checkbox">
         </div>
         <div>
-        <label for="pissoir">Pissoir</label>
-        <input id="pissoir" name="pissoir_only" type="checkbox">
+          <label for="pissoir">Pissoir</label>
+          <input id="pissoir" name="pissoir_only" type="checkbox">
         </div>
         <div>
-      <label for="gratis">Gratis</label>
-      <input id="gratis" name="gratis" type="checkbox">
+          <label for="gratis">Gratis</label>
+          <input id="gratis" name="gratis" type="checkbox">
+        </div>
+        <div>
+          <label for="maksPris">Maks pris</label>
+          <input id="maksPris" name="maksPris" type="text" placeholder="f.eks 10 kr">
+        </div>
+        <div>
+        <label for="plassering">Plassering</label>
+        <input id="plassering" name="plassering" type="text" placeholder="f.eks Nonneseter">
       </div>
       <div>
-      <label for="maksPris">Maks pris</label>
-      <input id="maksPris" name="maksPris" type="text" placeholder="f.eks 10 kr">
+        <label for="klokkeslett">Klokkeslett </label>
+        <input id="klokkeslett" name ="klokkeslett" type"text" placeholder="f.eks 22.00">
+      </div>
+        </fieldset>
+        <input type="submit" id="submit_search"  value="Search" name="advanced">
+      </form>
+      <h2> Liste over tilgjengelige toaletter</h2>
+      <ol id ="liste">
+      </ol>
+      <div id="map"></div>
     </div>
-    <div>
-    <label for="plassering">Plassering</label>
-    <input id="plassering" name="plassering" type="text" placeholder="f.eks Nonneseter">
-  </div>
-  <div>
-    <label for="klokkeslett">Klokkeslett </label>
-    <input id="klokkeslett" name ="klokkeslett" type"text" placeholder="f.eks 22.00">
-  </div>
-    </fieldset>
-    <input type="submit" id="submit_search"  value="Search" name="advanced">
-  </form>
-    <h2> Liste over tilgjengelige toaletter</h2>
-    <ol id ="liste">
-    </ol>
-    <div id="map"></div>
-  </div>
     <footer>
       <p>
-      Nettside om toaletter og lekeplasser i Bergen
-      &#169; Group 6969
+        Nettside om toaletter og lekeplasser i Bergen
+        &#169; Group 6969
       </p>
     </footer>
   </body>
-</html>
+  </html>
