@@ -137,14 +137,7 @@ function fast_search(){
         break;
     }
 
-<<<<<<< HEAD
     if(query_string.match(/[a-zæøå]+[:]/)){
-=======
-    i = query_string.indexOf("+");
-    result[k] = query_string.substring(0,i);
-    query_string = query_string.substring(i+1);
->>>>>>> da088f731bc4e253e0a4fdca8b664fd137e81697
-
       var match = /[a-zæøå]+[:]/.exec(query_string);
       if(!match.index == 0){
       result[k] =  query_string.substring(0,match.index-1);
@@ -288,7 +281,6 @@ for(var i = 0; i < result.length;i++){
 return søk;
 }
 
-
 function isEmpty(obj) {
     for(var prop in obj) {
         if(obj.hasOwnProperty(prop)){
@@ -411,12 +403,9 @@ function find_common(arr){
     var x = document.createElement("SELECT");
     x.setAttribute("id", "mySelect");
     document.getElementById("drop").appendChild(x);
-<<<<<<< HEAD
     document.getElementById("knapp").addEventListener("click", function(){
       NLekeplasser();
     });
-=======
->>>>>>> da088f731bc4e253e0a4fdca8b664fd137e81697
     for(var i = 0;i<jsonData.entries.length+1 ;i++){
     var z = document.createElement("option");
     z.setAttribute("id","test");
@@ -489,14 +478,10 @@ function lengdeTekst(km) {
 // nærmeste lekeplassene i en sortert liste.
 // Returnerer listen
 function lagListeMedLekeplasser(toalettNavn) {
-<<<<<<< HEAD
-  for(var i =0; i < 14; i++){
-=======
   console.log(toalettNavn);
   var lekeplasser = [];
 
   for(var i =0; i < jsonData.entries.length; i++){
->>>>>>> da088f731bc4e253e0a4fdca8b664fd137e81697
     var teller = i + 1;
     var toalettLat = 0;
     var toalettLong = 0;
@@ -505,16 +490,6 @@ function lagListeMedLekeplasser(toalettNavn) {
     if (a == toalettNavn) {
       toalettLat = parseFloat(jsonData.entries[i].latitude);
       toalettLong = parseFloat(jsonData.entries[i].longitude);
-<<<<<<< HEAD
-    }
-  }
-  var lekeplassListe = [];
-  for(var j = 0; j < jsonData2.entries.length; j++) {
-        jsonData2.entries[j].longitude));
-        lekeplassListe.push(kalkulerDistanse(toalettLat, toalettLong, jsonData2.entries[j].latitude,
-            jsonData2.entries[j].longitude));
-  }
-=======
       for(var j = 0; j < jsonData2.entries.length; j++) {
         // Oppretter lekeplass-objekter med navn og distanse
         lekeplasser[j] = {
@@ -532,5 +507,4 @@ var lekeplasserhtml = lekeplasser.slice(0,5).map(function (element){
   return '<li>' + lengdeTekst(element.distanse) + " " + element.navn + '</li>';
   }).join(' ');
   document.getElementById("lekeplasser").innerHTML = lekeplasserhtml;
->>>>>>> da088f731bc4e253e0a4fdca8b664fd137e81697
 }
