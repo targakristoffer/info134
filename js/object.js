@@ -307,8 +307,9 @@ function isEmpty(obj) {
   }
   return true;
 }
-// funksjonen søker igjennom matchene fra avansert eller hurtigsøk,
-//søker igjennom jsonData for å matche søkene
+/* Funksjonen søker igjennom matchene fra avansert eller hurtigsøk,
+   søker igjennom jsonData for å matche søkene
+*/
 function match_search(search_method){
   var k = {};
   if(search_method == 1){
@@ -419,6 +420,14 @@ function find_common(arr){
   return new_result;
 }
 
+<<<<<<< HEAD
+=======
+var buttonPushed = false;
+
+/* funksjonen lager en drop down menu hvor man kan velge et av toalettene,
+   toalett valget blir sendt videre til lagListeMedLekeplasser
+*/
+>>>>>>> fec31d5f8e5b9d51b6f390783d92d96455a0e5d0
 function velgFavorittToalett() {
   if(!buttonPushed){
     var t ="";
@@ -455,10 +464,11 @@ function tilRadianer(grader) {
   return resultat;
 }
 
-// Kalkulerer en distanse mellom to lokasjoner i km,
-// tar inn longitude og latitude som argumenter.
-// Funksjonen bruker Haversine formula som determinerer
-// distansen mellom to punkt på sfæren til en kule
+/* Kalkulerer en distanse mellom to lokasjoner i km,
+   tar inn longitude og latitude som argumenter.
+   Funksjonen bruker Haversine formula som determinerer
+   distansen mellom to punkt på sfæren til en kule
+*/
 function kalkulerDistanse(lat1, long1, lat2, long2) {
 
   // Jordas radius i km
@@ -488,17 +498,19 @@ function sorter_lekeplasser(lekeplasser) {
   return lekeplasser;
 }
 
-// Funksjon som får inn en lengde i km og returnerer en avrundet
-// verdi i meter om lengden < 1, eller km om lengden er >= 1
+/* Funksjon som får inn en lengde i km og returnerer en avrundet
+   verdi i meter om lengden < 1, eller km om lengden er >= 1
+*/
 function lengdeTekst(km) {
   if (km < 1) {
     return Math.round(km*1000) + " meter";
   } else return Math.round(km*100)/100 + " km";
 }
 
-// Funksjon som tar inn navnet på et toalett og finner de
-// nærmeste lekeplassene i en sortert liste.
-// Returnerer listen
+/* Funksjon som tar inn navnet på et toalett og finner de
+   nærmeste lekeplassene i en sortert liste.
+   Returnerer listen
+*/
 function lagListeMedLekeplasser(toalettNavn) {
   var lekeplasser = [];
 
