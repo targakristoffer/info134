@@ -119,10 +119,13 @@ function fill_map(søkeobj){
     teller = teller + 1;
   }
 }
-/* */
+/* Funksjon som brukes for hurtigsøk. Henter og lager spørrinsstrenger fra url'en. Oppretter et objekt som skal senere
+ * sammenlignes med json objektet for å finne likheter.
+ */
 function fast_search(){
   var uri = decodeURIComponent(document.location.href);
   var result = [];
+  var søk ={};
   var query_string="";
   var k = 0;
 
@@ -136,14 +139,14 @@ function fast_search(){
       result[k] = query_string;
       break;
     }
-
+    //Ser etter søkekriterer. F.eks "pris:" eller "rullestol:".
     if(query_string.match(/[a-zæøå]+[:]/)){
       var match = /[a-zæøå]+[:]/.exec(query_string);
       if(!match.index == 0){
         result[k] =  query_string.substring(0,match.index-1);
         query_string = query_string.substring(match.index)
       }
-      else {
+      else { //Ser spesifikt etter søkekriteret plassering.
         if(query_string.match(/plassering/)){
           var match2 = /[+][a-zæøå]+[:]/.exec(query_string);
           if(match2 != null){
@@ -156,33 +159,28 @@ function fast_search(){
           }
         }
         else{
+          //Skiller på mellomrom om ikke annet krav oppfylles.
           result[k] = query_string.substring(0,query_string.indexOf("+"));
           query_string = query_string.substring(query_string.indexOf("+")+1);
         }
       }
     }
     else{
-
       result[k] = query_string;
       query_string="";
-
     }
     k = k +1;
-
   }
-
-
-  var søk ={};
-
   for(var i = 0; i < result.length;i++){
-
+    //Går gjennom alle mulige properties i jsonobjektet for toaletter. Kunne kanskje gått igjennom properties for json med en
+    // for-løkke for så å bruke dette i en regex for å sammenligne slik at koden kunne blitt brukt for andre jsonobjekter.
     if(result[i].match(/(plassering)/i)){
       søk.plassering = result[i].substring(result[i].indexOf(":")+1).replace(/[+]/g," ");
     }
     if(result[i].match(/(place)/i)){
       søk.place = result[i].substring(result[i].indexOf(":")+1);
     }
-    if(!result[i].match(/(\w+[:])/i)){
+    if(!result[i].match(/(\w+[:])/i)){ //fritekst
       søk.adresse = result[i].replace(/[+]/g," ");
     }
     if(result[i].match(/(herre:)/i)){
@@ -196,7 +194,7 @@ function fast_search(){
       }
     }
     if(result[i].match(/(åpen:)/i)){
-      if(result[i].substring(result[i].indexOf(":")+1) == "nå"){
+      if(result[i].substring(result[i].indexOf(":")+1) == "nå"){ //klokkeslett nå
         søk.åpen_nå = new Date().toLocaleTimeString('en-US', {hour12: false, hour:"numeric", minute: "numeric"}).replace(":",".");
       }
       if(result[i].substring(result[i].indexOf(":")+1).match(/^(|0[0-9]|1[0-9]|2[0-3])(:|.)[0-5][0-9]$/)){ //matcher etter klokkeslett i format HH:MM (enten med . eller :).
@@ -251,9 +249,8 @@ function advanced(){
   for(var i = 0; i < result.length;i++){
     if(result[i].match(/(plassering)/)){
       if(result[i].substring(result[i].indexOf("=")+1) != "")
-      søk.plassering = result[i].substring(result[i].indexOf("=")+1).replace(/[+]/g," ");
+      søk.adresse = result[i].substring(result[i].indexOf("=")+1).replace(/[+]/g," ");
     }
-
     if(result[i].match(/(kjønnHerre)/)){
       if(result[i].substring(result[i].indexOf("=")+1) == "on"){
         søk.herre = 1;
@@ -344,7 +341,7 @@ function match_search(search_method){
       if(jsonData.entries[i].hasOwnProperty(keys[j])){
         var regex = new RegExp( k[keys[j]], 'i' );
         if(keys[j] == "adresse"){
-        if(jsonData.entries[i].plassering.match(regex)){
+        if(jsonData.entries[i].plassering.match(regex) || jsonData.entries[i].place.match(regex)){
             teller++;
         }
       }
@@ -422,13 +419,6 @@ function find_common(arr){
   return new_result;
 }
 
-<<<<<<< HEAD
-
-=======
-var buttonPushed = false;
-// funksjonen lager en drop down menu hvor man kan velge et av toalettene,
-// toalett valget blir sendt videre til lagListeMedLekeplasser
->>>>>>> a41bb9d6ccec8f700e56f364efeab25f3ed61ba7
 function velgFavorittToalett() {
   if(!buttonPushed){
     var t ="";
