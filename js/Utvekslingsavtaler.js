@@ -12,6 +12,7 @@ function søk(){
   while(ul.firstChild){
     ul.removeChild(ul.firstChild);
   }
+  //Hvilken property som skal søkes etter.
   if(document.getElementById("radio_land").checked){
     valg = "land";
   }
@@ -24,7 +25,7 @@ function søk(){
       for(prop in jsonData.avtale[i]){
         var a = jsonData.avtale[i][prop];
         var li = document.createElement("li");
-        if(bool){
+        if(bool){//Lager overskrift for hvert søkeresultat
           li.innerHTML =  prop + " : " + "<h3>" + a +"</h3>";
           ul.appendChild(li);
         }
