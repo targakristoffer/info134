@@ -1,7 +1,3 @@
-/* MERK! Dette er et pågående prosjekt hvor jeg prøver meg veldig frem med kodingen og det er nokså uryddig
-og vanskelig å lese. Alt i alt skal koden generere et kart over Bergen med offentlige toaletter hentet fra et JSON-dokument og brukeren
-har mulighet til å søke etter adresse, kjønn, pris osv. */
-
 var jsonData ={};
 var jsonData2 = {};
 var buttonPushed = false;
@@ -222,7 +218,7 @@ function fast_search(){
   return søk;
 
 }
-
+/* Gjør hovedsaklig det samme som fast_search(). Url syntaxen er bare annerledes så må dele opp spørrestrengen på en annen måte. */
 function advanced(){
   var uri = decodeURIComponent(document.location.href);
   var result = [];
@@ -328,7 +324,7 @@ function match_search(search_method){
     var keys = Object.keys(k);
     var teller = 0;
     for(var j = 0; j < keys.length; j++){
-      if(keys[j] == "åpen_nå" || keys[j] == "åpen"){
+      if(keys[j] == "åpen_nå" || keys[j] == "åpen"){ //Sjekker spesifikt etter tid.
         var date = new Date();
         if(check_open(jsonData.entries[i], k[keys[j]], date.getDay())){
           teller++;
@@ -339,8 +335,8 @@ function match_search(search_method){
           teller++;
         }
       }
-      if(jsonData.entries[i].hasOwnProperty(keys[j])){
-        var regex = new RegExp( k[keys[j]], 'i' );
+      if(jsonData.entries[i].hasOwnProperty(keys[j])){//Sjekker om keys har samme properties som jsonData.
+        var regex = new RegExp( k[keys[j]], 'i' ); //passer på at regex er case-insensitive.
         if(keys[j] == "adresse"){
         if(jsonData.entries[i].plassering.match(regex) || jsonData.entries[i].place.match(regex)){
             teller++;
@@ -355,7 +351,7 @@ function match_search(search_method){
       }
     }
   }
-  fill_map(arr);
+  fill_map(arr); //sender array med alle objektene som matchet søket.
 }
 //sjekker åpningstid for hverdag, lørdag og søndag
 function check_open(json, search_time, day){
@@ -384,40 +380,6 @@ function check_open(json, search_time, day){
     }
   }
   return false;
-}
-// funksjonen finner felles matcher og putter resultatet i en ny tabell hvis det er match
-function find_common(arr){
-  var result = [];
-  var teller = 0;
-
-  for(var i = 0; i < arr.length; i++){
-    for(var j = i+1; j < arr.length; j++){
-      if(arr[i] == arr[j]){
-        result[teller] = arr[i];
-        teller = teller + 1;
-        i = i + 1;
-        j = i + 1;
-      }
-    }
-  }
-
-  var new_result = [];
-  var l  = result.length;
-
-  for(var i = 0; i < l; i++){
-    for(var j = i+1; j < l; j++){
-      if(result[i] == result[j]){
-        new_result = find_common(result);
-      }
-    }
-  }
-  if(result[0] == null){
-    return arr;
-  }
-  if (new_result[0] == null){
-    return result;
-  }
-  return new_result;
 }
 
 function velgFavorittToalett() {
