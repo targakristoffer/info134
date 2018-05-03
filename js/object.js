@@ -172,26 +172,26 @@ function fast_search(){
 
   for(var i = 0; i < result.length;i++){
 
-    if(result[i].match(/(plassering)/)){
+    if(result[i].match(/(plassering)/i)){
       søk.plassering = result[i].substring(result[i].indexOf(":")+1).replace(/[+]/g," ");
     }
-    if(result[i].match(/(place)/)){
+    if(result[i].match(/(place)/i)){
       søk.place = result[i].substring(result[i].indexOf(":")+1);
     }
-    if(!result[i].match(/(\w+[:])/)){
+    if(!result[i].match(/(\w+[:])/i)){
       søk.adresse = result[i].replace(/[+]/g," ");
     }
-    if(result[i].match(/(herre:)/)){
+    if(result[i].match(/(herre:)/i)){
       if(result[i].substring(result[i].indexOf(":")+1) == "1"){
         søk.herre = 1;
       }
     }
-    if(result[i].match(/(dame:)/)){
+    if(result[i].match(/(dame:)/i)){
       if(result[i].substring(result[i].indexOf(":")+1) == "1"){
         søk.dame = 1;
       }
     }
-    if(result[i].match(/(åpen:)/)){
+    if(result[i].match(/(åpen:)/i)){
       if(result[i].substring(result[i].indexOf(":")+1) == "nå"){
         søk.åpen_nå = new Date().toLocaleTimeString('en-US', {hour12: false, hour:"numeric", minute: "numeric"}).replace(":",".");
       }
@@ -199,13 +199,13 @@ function fast_search(){
         søk.åpen = result[i].substring(result[i].indexOf(":")+1).replace(":",".");
       }
     }
-    if(result[i].match(/(pissoir_only)/)){
+    if(result[i].match(/(pissoir_only)/i)){
       søk.pissoir_only = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
-    if(result[i].match(/(stellerom)/)){
+    if(result[i].match(/(stellerom)/i)){
       søk.stellerom = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
-    if(result[i].match(/(pris)/)){
+    if(result[i].match(/(pris)/i)){
       if(result[i].substring(result[i].indexOf(":")+1) == "gratis"){
         søk.maks_pris = 0;
       }
@@ -213,7 +213,7 @@ function fast_search(){
         søk.maks_pris = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
       }
     }
-    if(result[i].match(/(rullestol)/)){
+    if(result[i].match(/(rullestol)/i)){
       søk.rullestol = result[i].substring(result[i].indexOf(":")+1).toUpperCase();
     }
   }
