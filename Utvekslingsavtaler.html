@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ubestemt åpen data</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel= "stylesheet" type="text/css" href="css/utvekslingsavtaler.css">
+  <script src ="js/Utvekslingsavtaler.js" type="text/javascript"></script>
+  <script type ="text/javascript" src="js/object.js"></script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjRpPvkaoSAxarcYltzGyVnk3hN-kD9NE">
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body onload= "get_data('https://fs.data.uib.no/KEY8utemagur/json/studkat/utvekslingsavtaler')">
+
+
+  <div class="flexkasse">
+    <nav>
+      <a href="index.html">Forside</a>
+      <a href="Toaletter.html">Toaletter</a>
+      <a href ="lekeplass.html">Lekeplasser</a>
+      <a href ="favtoalett.html">Ditt favoritt toalett</a>
+      <a href ="ubestemtåpendata.html"> Åpen data ting </a>
+      <form class="newsearch" method="get" action="Toaletter.html">
+        <input type="text" id="toalett" name="toalett" size="21" maxlength="100" placeholder="Search...">
+        <input type="submit" value="Search" class="button">
+      </form>
+    </nav>
+    <h1>Utvekslingsavtaler ved UIB</h1>
+    <p>Her kan du søke på ett land eller ett institutt for å få en oversikt over eventuelle utvekslingsavtaler med UIB.</p>
+  </div>
+  <fieldset>
+    <div>
+    <input type ="radio" name="valg" id="radio_land" value="land" checked ="checked">Land
+    <input type ="radio" name="valg" id="radio_institutt" value="institutt">Institutt
+    <input id="søkefelt" name="land" type="text" placeholder="f.eks Frankrike">
+    <input type="submit" value="Search" class="button" onclick = "søk()">
+  </div>
+  </fieldset>
+
+  <div id="soknadsalternativ"></div>
+  <div id="utvekslingsprogram"></div>
+  <div id="land"></div>
+  <div id="institusjon"></div>
+  <div id="fakultet"></div>
+  <div id="institutt"></div>
+  <div id="fagnavn"></div>
+  <div id="antall_plasser"></div>
+
+
+<ul id="liste"></ul>
+<div id="avtale"></div>
+<div id="map"></div>
+</div>
+  <footer>
+    <p>
+      Nettside om toaletter og lekeplasser i Bergen
+      &#169; Group 6969
+    </p>
+  </footer>
+</body>
+</html>
