@@ -523,6 +523,7 @@ function lagListeMedLekeplasser(toalettNavn) {
     var lekeplasserhtml = lekeplasser.slice(0,5).map(function (element){
       return '<li>' + lengdeTekst(element.distanse) + " " + element.navn + '</li>';
     }).join(' ');
+    // Viser lekeplassene på kartet
     document.getElementById("lekeplasser").innerHTML = lekeplasserhtml;
     fill_map(lekeplasser.slice(0,5));
   }
