@@ -4,7 +4,8 @@ har mulighet til å søke etter adresse, kjønn, pris osv. */
 
 var jsonData ={};
 var jsonData2 = {};
-
+var buttonPushed = false;
+/* Henter ut fil fra url og kjører isJson funksjonen for å se om det er en jsonfil */
 function get_data(url){
   xhr = new XMLHttpRequest();
   xhr.open("GET",url);
@@ -53,8 +54,9 @@ function check_method(){
     return match_search(1);
   }
   return full_load();
-
 }
+
+/* Funksjon som fyller kart fullstending med alle posisjoner i jsonobjektet */
 function full_load(){
   var pos1 = {lat:60.395343, lng:5.325745};
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -70,12 +72,13 @@ function full_load(){
     var ol = document.getElementById("liste");
     var li = document.createElement("li");
 
+    //For toalettsiden
     if (jsonData.entries[i].plassering != undefined) {
       li.innerHTML = a;
       ol.appendChild(li);
     }
-
-    else {li.innerHTML = b;
+    else {
+      li.innerHTML = b;
       ol.appendChild(li);
     }
     var marker = new google.maps.Marker({
@@ -86,6 +89,7 @@ function full_load(){
     });
   }
 }
+/* Funksjonen tar inn et objekt. Fyller ut kart etter posisjoner som er i objektet. */
 function fill_map(søkeobj){
   var obj = søkeobj;
   var teller = 1;
@@ -100,7 +104,7 @@ function fill_map(søkeobj){
     var ol = document.getElementById("liste");
     var li = document.createElement("li");
     var pos = {lat: parseFloat(obj[i].latitude), lng: parseFloat(obj[i].longitude)};
-
+    //for toalett
     if(a != undefined){
       li.innerHTML = a;
       ol.appendChild(li);
@@ -115,7 +119,7 @@ function fill_map(søkeobj){
     teller = teller + 1;
   }
 }
-
+/* */
 function fast_search(){
   var uri = decodeURIComponent(document.location.href);
   var result = [];
@@ -338,6 +342,11 @@ function match_search(search_method){
       }
       if(jsonData.entries[i].hasOwnProperty(keys[j])){
         var regex = new RegExp( k[keys[j]], 'i' );
+        if(keys[j] == "adresse"){
+        if(jsonData.entries[i].plassering.match(regex)){
+            teller++;
+        }
+      }
         if(jsonData.entries[i][keys[j]].match(regex)){
           teller++;
         }
@@ -412,7 +421,6 @@ function find_common(arr){
   return new_result;
 }
 
-var buttonPushed = false;
 
 function velgFavorittToalett() {
   if(!buttonPushed){
