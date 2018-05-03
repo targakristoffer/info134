@@ -49,6 +49,9 @@ function check_method(){
   if (uri.substring(uri.indexOf("?")+1).match(regex2)){
     return match_search(1);
   }
+  if(jsonData.avtale != undefined){
+    return get_json(jsonData);
+  }
   return full_load();
 }
 
