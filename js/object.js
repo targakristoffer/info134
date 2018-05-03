@@ -297,7 +297,7 @@ function advanced(){
   }
   return søk;
 }
-
+// Går igjennom alle properties i objektet
 function isEmpty(obj) {
   for(var prop in obj) {
     if(obj.hasOwnProperty(prop)){
@@ -306,7 +306,8 @@ function isEmpty(obj) {
   }
   return true;
 }
-
+// funksjonen søker igjennom matchene fra avansert eller hurtigsøk,
+//søker igjennom jsonData for å matche søkene
 function match_search(search_method){
   var k = {};
   if(search_method == 1){
@@ -349,7 +350,7 @@ function match_search(search_method){
   }
   fill_map(arr);
 }
-
+//sjekker åpningstid for hverdag, lørdag og søndag
 function check_open(json, search_time, day){
   if(json.tid_hverdag == "ALL" || json.tid_lordag == "ALL" || json.tid_sondag == "ALL"){
     return true;
@@ -377,7 +378,7 @@ function check_open(json, search_time, day){
   }
   return false;
 }
-
+// funksjonen finner felles matcher og putter resultatet i en ny tabell hvis det er match
 function find_common(arr){
   var result = [];
   var teller = 0;
@@ -413,7 +414,8 @@ function find_common(arr){
 }
 
 var buttonPushed = false;
-
+// funksjonen lager en drop down menu hvor man kan velge et av toalettene,
+// toalett valget blir sendt videre til lagListeMedLekeplasser
 function velgFavorittToalett() {
   if(!buttonPushed){
     var t ="";
