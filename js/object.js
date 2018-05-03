@@ -420,6 +420,10 @@ function find_common(arr){
   return new_result;
 }
 
+var buttonPushed = false;
+/* Funksjonen lager en drop down menu hvor man kan velge et av toalettene,
+valget blir sendt videre til lagListeMedLekeplasser*/
+
 function velgFavorittToalett() {
   if(!buttonPushed){
     var t ="";
