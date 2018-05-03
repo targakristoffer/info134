@@ -8,7 +8,7 @@ function søk(){
   var bool = true;
   var valg ="";
   var ul = document.getElementById("liste");
-  var søkeord = document.getElementById("søkefelt").value;
+  var søkeord = new RegExp(document.getElementById("søkefelt").value, "i");
   while(ul.firstChild){
     ul.removeChild(ul.firstChild);
   }
@@ -21,7 +21,7 @@ function søk(){
   }
   for(var i = 0; i < jsonData.avtale.length; i++){
     bool = true;
-    if (søkeord == jsonData.avtale[i][valg]) {
+    if (jsonData.avtale[i][valg].match(søkeord)) {
       for(prop in jsonData.avtale[i]){
         var a = jsonData.avtale[i][prop];
         var li = document.createElement("li");
