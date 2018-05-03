@@ -382,6 +382,10 @@ function check_open(json, search_time, day){
   return false;
 }
 
+var buttonPushed = false;
+/* Funksjonen lager en drop down menu hvor man kan velge et av toalettene,
+valget blir sendt videre til lagListeMedLekeplasser*/
+
 function velgFavorittToalett() {
   if(!buttonPushed){
     var t ="";
